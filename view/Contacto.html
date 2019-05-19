@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"  content="width=device-width , user-scalable= no,initial-scale=1.0,maximum-scale= 1.0,minimum-scale=1.0">
+
+
+   <title>Contacto</title>
+    <link rel="stylesheet" href="css/estilos_contacto.css">
+    <script src="js/sweetalert.min.js"></script>
+    <link href="css/sweetalert.css" rel="stylesheet" >
+   
+
+
+</head>
+<body>
+<header class="header">
+      <div class="contenedor">  
+         <h1 class="logo">Logo</h1>
+        <span class="icon-menu" id="btn-menu"></span>
+        <nav class="nav" id="nav">
+          <ul class="menu">
+            <li class="menu__item"><a href="index.html" class="menu__link ">Inicio</a></li>
+            <li class="menu__item"><a href="#" class="menu__link">Nuestros Productos</a></li>
+            <li class="menu__item"><a href="Contacto.html" class="menu__link select">Contacto</a></li>
+            <li class="menu__item"><a href="login.html" class="menu__link">Ingresar</a></li>
+            <li class="menu__item"><a href="#" class="menu__link">Registrarse</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div class="banner">
+     <img src="img/banner.jpg" alt="">
+    </div>
+
+
+   
+    <div class="contacto"  >
+
+        <form>
+             <h2>Contacto</h2>
+          <label> NOMBRE </label>  
+        <input class="input" type="text" name="nombre"  placeholder="Ingrese nombre" required autofocus>
+            <br><br>
+          <label> CORREO</label>
+        <input class="input" type="text" name="nombre"  placeholder="Ingrese nombre" required autofocus>
+            <br><br>
+              <label> TELEFONO </label>
+       <input class="input" type="text" name="nombre"  placeholder="Ingrese nombre" required autofocus>
+        <br><br>
+       <textarea class="textarea"name="Mensaje"  placeholder="Ingrese aqui su mensaje por favor" > </textarea> 
+        
+        <br>
+        <input type="button" value="enviar" id="env-contacto" onclick="mensaje()"> 
+            
+         <script>
+              function mensaje(){
+         swal({
+  title: "CORREO ENVIADO!",
+  text: "Gracias por comunicarse con nosotros estaremos poniendonos en contacto muy pronto",
+  icon: "success",
+  button: "Aceptar",
+});
+              }
+            
+            
+            
+            </script>
+        </form>
+     <br><br>
+        <div id="logos">
+
+    <div id="block"><img src="img/facebook.png" alt="" class="imagen">
+     <p style="font-weight: bold" class="texto"> #DulcesMomentosMedellin</p>
+     <tr>
+    </div>
+
+    <div id="block"> <img src="img/whatsapp.png" alt="" class="imagen">
+     <p style="font-weight: bold" class="texto"> 3057772627 </p>
+            </div>
+        
+    <div id="block"><img src="img/gmail.jpg" alt="" class="imagen"> 
+    <p style="font-weight: bold" class="texto"> example@gmail.com </p> 
+        </div>
+         
+         </div>
+        
+    </div>
+    
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="js/jquery-1.11.2.min.js"><\/script>')</script>
+
+
+</body>
+</html>
