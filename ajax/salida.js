@@ -12,10 +12,15 @@ $(document).ready(function(){
                 cantidad : $('#cantidad_'+ $(element).attr('idInsumo')).val(),
             }
             // console.log(postData);
-            $.post('http://localhost:8080/ProyectoExpo/controller/salidaController.php', postData, function(response){
+            $.post('http://localhost:80/ProyectoExpo/controller/salidaController.php', postData, function(response){
                     // console.log(response);
                 if (response==1) {
-                    alert("Agregaste Este producto");
+                    swal({title: "Agregado",    
+                    text: "Agregado correctamente", 
+                    type:"success", 
+                    confirmButtonText: "OK", 
+                    closeOnConfirm: true 
+                  });  
              
                 } else {
                     // console.log(response);
@@ -37,17 +42,17 @@ $(document).on('click', '#eliminar', function(e){
             idInsumo : $(element).attr('idInsumo'),
         }
         // console.log(postData);
-            $.post('http://localhost:8080/ProyectoExpo/controller/salidaController.php', postData, function(response){
+            $.post('http://localhost:80/ProyectoExpo/controller/salidaController.php', postData, function(response){
                     listar();
                     $('#categoria-form').trigger('reset');
                     // console.log(response);
                     if (response) {
-                        swal({title: "Exito",    
-                        text: "Eliminar."+response, 
-                        type:"error", 
+                        swal({
+                            title: "Eliminado",    
+                        text: "Se elimino correctamente ", 
+                        type:"success", 
                         confirmButtonText: "OK", 
                         closeOnConfirm: true 
-                        
                         });  
                     listar(); 
                     } else {
@@ -66,7 +71,7 @@ $(document).on('click', '#eliminar', function(e){
 
     function listar2(){
         $.ajax({
-            url : 'http://localhost:8080/ProyectoExpo/controller/salidaController.php',
+            url : 'http://localhost:80/ProyectoExpo/controller/salidaController.php',
             type : 'GET',
             success : function(response){
                 // console.log(response);
@@ -95,7 +100,7 @@ $(document).on('click', '#eliminar', function(e){
     function listar(){
         let listar="listar";
         let total=0;
-            $.post('http://localhost:8080/ProyectoExpo/controller/salidaController.php', listar, function(response){
+            $.post('http://localhost:80/ProyectoExpo/controller/salidaController.php', listar, function(response){
                 // $('#categoria-form').trigger('reset');
                 // console.log(response);
                 if (response) {

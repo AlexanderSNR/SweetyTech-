@@ -39,7 +39,7 @@ $(document).ready(function(){
        url:'../controller/controllerPedido.php',
        data: parametros,
        beforeSend: function(objeto) {
-         $('#pedidos').html("<br><br><center ><div class='cssload-box-loading'></div><br>Cargando ...</center>");
+         $('#pedidos').html("<center ><div class='cssload-box-loading'></div><br><br>Cargando ...</center>");
          },
        success: function(data){ 
           

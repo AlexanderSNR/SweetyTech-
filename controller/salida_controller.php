@@ -104,8 +104,8 @@ public function alertarstock()
             $nuevacantidad->execute();
             $resta=$cantidad2-$cantidad1;     
             //consulta2="UPDATE tbl_insumo set cantidad=($resta) where Codigo_insumo=?";
-            $actualizacion=$this->conexion->prepare($consulta2);
-            $actualizacion->execute();
+            //$actualizacion=$this->conexion->prepare($consulta2);
+            //$actualizacion->execute();
 
 			return true;
         } catch (Exception $e) {

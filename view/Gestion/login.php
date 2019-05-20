@@ -1,8 +1,12 @@
 <?php
-require_once '../../controller/user_controller.php';
-require_once '../../model/user_model.php';
-require_once '../../helps/helps.php';
-$control = new User_controller();
+ session_start();
+ if (isset($_SESSION['usuario'])) {
+      if ($_SESSION['usuario']['Id_Rol'] == 1) {
+        echo "<script>window.location.href='../user/C_clientes.php'</script>";
+      }else{
+        echo "<script>window.location.href='../Pedidos/view/Catalogo.php'</script>";
+      }
+ }
 ?>
 <html lang="en">
 
@@ -33,9 +37,9 @@ $control = new User_controller();
                 <img id="logo" src="../../public/img/logo.png">
                 <h1 id="login_t">Inicia Sesión</h1>
                 <h4 id="login_r">¿No tienes cuenta?<a href="#">Regístrate</a></h4>
-                <form action="#" method="POST">
+                <form >
                     <label for="email" class="lbl-email">Email</label>
-                    <input type="text" class="user" id="email" name="email" autocomplete="off">
+                    <input type="email" class="user" id="email" name="email" autocomplete="off">
 
                     <label for="clave" class="lbl-clave">Contraseña</label>
                     <input type="password" class="password" id="clave" name="pwd" autocomplete="off">
@@ -54,7 +58,7 @@ $control = new User_controller();
                     </div>
                     <div style="margin-bottom:10%;">
 
-                        <button type="submit" name="iniciar" id="btn-login">Iniciar sesión</button>
+                        <button type="button" name="iniciar" id="btn-login">Iniciar sesión</button>
                         <br>
                         <a href="recover_password.php" id="recuperar">¿Olvidaste tu contraseña?</a>
                     </div>
@@ -72,34 +76,55 @@ $control = new User_controller();
     <script src="../../public/js/bootstrap.js"></script>
     <script src="../../public/js/superplaceholder.min.js"></script>
     <script src="../../public/js/script2.js"></script>
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
    
 
     <script type="text/javascript" src="../../public/librerias/notify/sweetalert.min.js"></script>
-
-    <?php
-                   
-		if (isset($_POST['iniciar'])) {
-            
-            $email=validar_campo($_POST['email']);
-            $resultado = $control->iniciar($email,$_POST['pwd']);
-			if ( $resultado != false) {
-                   switch ($resultado) {
-                       case 1:
-                       echo "<script>window.location.href='../user/C_clientes.php'</script>";
-                           break;
-                       case 2:
-                       echo "<script>window.location.href='../Pedidos/view/Catalogo.php'</script>";
-                       break;  
-                   }
-            }else {
-                echo '<script> swal ( "Oops" ,  "El usuario o la contraseña es incorrecta!" ,  "error" ); </script>';
-            }
-        }
-		?>
-
     <meta http-equivale="refresh" content="0;url=login.php">
-
+  <script>
+  $(document).ready(function(){
+  $("#btn-login").click(function(){
+    var email = $("#email").val();
+    var password = $("#clave").val();
+    var parametros = {"action":"ajax","option":'1',"email":email,"password":password};
+   $.ajax({
+       url:'../../controller/ValidarLogin.php',
+       type:  'post',
+       data: parametros,
+       beforeSend: function(objeto) {
+         $('#btn-login').text("Validando...");
+         },
+       success: function(data){ 
+       var respuesta = parseInt(data);
+       switch (respuesta) {
+           case -1:
+                swal("Lo sentimos", "Tu cuenta esta inactiva ", "error");
+                $('#clave').val("");
+               break;
+               case 0:
+                swal("Lo sentimos", "Tu correo o contraseña son incorrectas ", "error");
+                $('#clave').val("");
+               break;
+               case 1 :
+               window.location.href = "../user/C_clientes.php";
+               break;
+               case 2 :
+               window.location.href = "../Pedidos/view/Catalogo.php";
+               break;
+       
+           default:
+           swal("Upss", "Tenemos Problemas,intenta mas tarde ", "error");
+               break;
+       }
+       $('#btn-login').text("Iniciar sesión");
+       } ,
+       error: function(){
+           console.log("Ha ocurrido un error! :(");
+       }
+   });
+  });
+});
+  </script>
 
 
 

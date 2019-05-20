@@ -21,9 +21,13 @@ $Empresa = new EmpresaController();
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../../public/css/fileinput.min.css">
 <?php include ("../util/head.php"); ?>
-
+<style>
+#imagen_insumo{
+  width:80%;
+}
+</style>
 
 <body>
     <?php include ("../util/menu.php"); ?>
@@ -52,15 +56,15 @@ $Empresa = new EmpresaController();
 
                 <form action="R_Insumo.php" method="post" enctype="multipart/form-data">
 
-                <div class="form-group">
+                <div >
                   <label for="campo" class="lbl-campo">Nombre Insumo: <span style="color:red;"> *</span></label>
-                  <input type="text" class="form-control" id="campo" name="Nombre_Insumo" placeholder="Ingrese el Nombre" >
+                  <input type="text" class="campos" id="campo" name="Nombre_Insumo" placeholder="Ingrese el Nombre" >
                 </div>
 
               <!---------------------------------  Select Empresa ---------------------------->
-                <div class="form-group">
+                <div >
                   <label for="campo" class="lbl-campo">Empresa: <span style="color:red;"> *</span></label>
-                  <select id="campo" class="form-control" name="Nit_Empresa" >
+                  <select id="campo" class="campos" name="Nit_Empresa" >
                       <option selected>Seleccionar</option>
                           <?php 
                               foreach ($Empresa->Listar() as $r):?>
@@ -71,30 +75,30 @@ $Empresa = new EmpresaController();
                   </select>
                 </div>
 
-                <div class="form-group">
+                <div >
                   <label for="campo" class="lbl-campo">Precio Entrada: <span style="color:red;"> *</span></label>
-                  <input type="number" class="form-control" id="campo" name="Precio_Entrada" >
+                  <input type="number" class="campos" id="campo" name="Precio_Entrada" >
                 </div>
 
-                <div class="form-group">
+                <div>
                   <label for="campo" class="lbl-campo">Precio Cliente: <span style="color:red;"> *</span></label>
-                  <input type="number" class="form-control" id="campo" name="Precio_Cliente" >
+                  <input type="number" class="campos" id="campo" name="Precio_Cliente" >
                 </div>
 
-                <div class="form-group">
+                <div >
                   <label for="campo" class="lbl-campo">Stockminimo: <span style="color:red;"> *</span></label>
-                  <input type="number" class="form-control" id="campo" name="StockMinimo" >
+                  <input type="number" class="campos" id="campo" name="StockMinimo" >
                 </div>
 
-                <div class="form-group">
+                <div >
                   <label for="campo" class="lbl-campo">Cantidad: <span style="color:red;"> *</span></label>
-                  <input type="number" class="form-control" id="campo" name="Cantidad" >
+                  <input type="number" class="campos" id="campo" name="Cantidad" >
                 </div>
 
               <!---------------------------------  Select Categorias ---------------------------->
-                <div class="form-group">
+                <div >
                   <label for="campo" class="lbl-campo">Categoria: <span style="color:red;"> *</span></label>
-                  <select id="campo" class="form-control" name="id_Categoria" >
+                  <select id="campo" class="campos" name="id_Categoria" >
                       <option selected>Seleccionar</option>
                         <?php 
                           foreach ($Categoria->Listar() as $r):?>
@@ -106,9 +110,9 @@ $Empresa = new EmpresaController();
                     <br><?php include ("../Categoria/R_Categoria.php"); ?> 
                 </div>
                 <!---------------------------------  Select Tamaño ---------------------------->
-                <div class="form-group">
+                <div >
                   <label for="campo" class="lbl-campo">Tamaño: <span style="color:red;"> *</span></label>
-                  <select id="campo" class="form-control" name="Id_Tamano" >
+                  <select id="campo" class="campos" name="Id_Tamano" >
                       <option selected>Seleccionar</option>
                       <?php 
                         foreach ($Tamano->Listar() as $r):?>
@@ -120,9 +124,9 @@ $Empresa = new EmpresaController();
                   <?php include ("../Tamaño/R_Tamano.php"); ?> 
                 </div>
                 <!---------------------------------  Select Tipo Envoltura ---------------------------->
-                <div class="form-group">
+                <div >
                   <label for="campo" class="lbl-campo">Tipo Envoltura: <span style="color:red;"> *</span></label>
-                  <select id="campo" class="form-control" name="Id_Tipo_Envoltura" >
+                  <select id="campo" class="campos" name="Id_Tipo_Envoltura" >
                       <option selected>Seleccionar</option>
                       <?php 
                           foreach ($TipoEnvoltura->Listar() as $r):?>
@@ -134,9 +138,9 @@ $Empresa = new EmpresaController();
                     <?php include ("../Envoltura/R_TipoEnvoltura.php"); ?>
                 </div>
 
-                 <div class="form-group">
+                 <div id="imagen_insumo">
                     <label for="campo" class="lbl-campo"> Imagen: </label>
-                    <input type="file" class="form-control-file" name="Imagen">
+                    <input type="file" name="Imagen" id="archivos" >
                 </div>
 
             <input type="submit" class="btn btn-primary nextBtn btn-lg pull-right" type="button"  style="float: right; margin-right:3%; margin-top:2%;" value="Registrar" name ="Registrar">
@@ -154,7 +158,7 @@ if (isset($_POST['Registrar'])) {
   !empty($_POST['StockMinimo']) && !empty($_POST['Cantidad']) && !empty($_POST['id_Categoria']) && !empty($_POST['Id_Tamano']) && 
   !empty($_POST['Id_Tipo_Envoltura']) && !empty($_POST['Imagen']) ) {
     
-    $destinourl = "ImagenInsumo/".$_FILES['Imagen']['name'];
+    $destinourl = "ImagenInsumo/".basename($_FILES['Imagen']['name']);
     move_uploaded_file($_FILES['Imagen']['tmp_name'],$destinourl);  
 
     $Insumo->__SET('Nombre_Insumo',$_POST['Nombre_Insumo']);
@@ -207,7 +211,16 @@ echo 'Debe llenar el formulario.';
 }
        
 ?>
-
-		
+<script src="../../public/js/fileinput.min.js"></script>
+<script>
+$("#archivos").fileinput({
+  uploadUrl:"upload.php",
+  uploadAsync:false,
+  minFileCount:1,
+  maxFileCount:1,
+  showUpload:false,
+  showRemove:false
+});
+</script>
     </body>
 </html>

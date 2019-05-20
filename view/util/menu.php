@@ -116,7 +116,7 @@ $stock= new salida_controller();
 						 ">
 					<li>REGISTRAR</li>
 				</a>
-				<a href="#">
+				<a href="../PedidosAdmin/C_pedidos.php">
 					<li>CONSULTAR</li>
 				</a>
 			</ul>

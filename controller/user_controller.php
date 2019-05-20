@@ -32,37 +32,7 @@ class User_Controller extends Conexion
         } catch (Exception $e) {
             die($e->getMessage());
         }
-    }
-    
-public function iniciar($usuario,$pass)
-    {    
-    //escapa carecteres especiales 
-     $usuario = $this->conexion->quote($usuario);
-     $pass = $this->conexion->quote($pass);
-     $usu=$usuario;
-     $password=hash('md5',$_POST['pwd']);
-     $iniciar=" call ValidarLogin(:userEmail,:pwd)";
-         try {
-             $resultado = $this->conexion->prepare($iniciar);
-             $resultado->bindParam("userEmail", $usuario,PDO::PARAM_STR) ;
-             $resultado->bindParam("pwd", $password,PDO::PARAM_STR) ;
-             $resultado->execute();
-             $count = $resultado->rowCount();
-             $datos=$resultado->fetch(PDO::FETCH_ASSOC);
-             if($count) {
-             $_SESSION['usuario']= $datos;
-             return $datos['Id_Rol'];
-            }
-            else{
-                return false;
-            } 
-         } catch (Exception $e) {
-             echo $e;
-         }
-}
-            
-        
-    
+    } 
     public function insertar(Usuariomodel $persona)
     {
         var_dump($persona);

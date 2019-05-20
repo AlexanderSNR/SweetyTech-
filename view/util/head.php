@@ -11,6 +11,7 @@
 		<link rel="stylesheet" type="text/css" href="../../public/librerias/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 		<link href="../../public/librerias/fonts/icon-font.min.css" rel="stylesheet" />
 		<script src="../../public/librerias/notify/sweetalert.min.js"></script>
+
 		<!-- CSS DATATABLES -->
 		<link rel="stylesheet" type="text/css" href="../../public/DataTables/Bootstrap-4-4.1.1/css/bootstrap.min.css"/>
 		<link rel="stylesheet" type="text/css" href="../../public/DataTables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css"/>

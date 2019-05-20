@@ -24,7 +24,7 @@ $Ancheta= new AnchetaModel();
         <script src="../../public/librerias/notify/sweetalert.min.js"></script>
 		<link  rel="stylesheet" href="../../public/css/responsive.min.css" />
 		<link  rel="stylesheet" href="../../public/css/style.min.css" />
-    <link id="bootstrap-styleshhet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link id="bootstrap-styleshhet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     
 </head> 
 
