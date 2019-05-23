@@ -7,12 +7,10 @@ require '../public/Librerias/Mail/PHPMailer.php';
 require '../public/Librerias/Mail/SMTP.php';
 
 $user= $_GET['user'];
-$codigo=$_GET['code'];
 // Instantiation and passing `true` enables exceptions
 $mail = new PHPMailer(true);
-$template = file_get_contents('../view/Gestion/plantilla_correo.php');
-$template = str_replace("{{codigo}}", $codigo, $template);
-$template = str_replace("{{imagen}}", $Imagen, $template);
+$template = file_get_contents('../view/Gestion/plantilla_Cambio.php');
+
 
 
 try {
@@ -28,7 +26,7 @@ try {
 
     //Recipients
     $mail->setFrom('zthiven45@gmail.com');
-    $mail->addAddress($user);     // Add a recipient
+    $mail->addAddress('zthiven45@gmail.com');     // Add a recipient
     /*$mail->addAddress('ellen@example.com');               // Name is optional
     $mail->addReplyTo('info@example.com', 'Information');
     $mail->addCC('cc@example.com');
@@ -40,9 +38,9 @@ try {
 */
     // Content
     $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = 'RESTABLECER CUENTA DULCES MOMENTOS';
+    $mail->Subject = 'REGISTRO CUENTA DULCES MOMENTOS';
     $mail->AddEmbeddedImage($Imagen, '../public/img/logo.png'); 
-    $mail->Body    = $template;
+    $mail->Body = $template;
    
     
 
@@ -52,4 +50,4 @@ try {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
 
-header("location:../view/gestion/validate_code.php");
+header("location:../view/User/c_clientes.php");

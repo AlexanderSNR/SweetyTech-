@@ -207,7 +207,7 @@ $(document).ready(function(){
 	}
 
 </script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>	
 <body>
 <!-- header -->
@@ -218,10 +218,10 @@ $(document).ready(function(){
 			</div>
 			<div class="agile-login">
 				<ul>
-					<li><a href="#">Mi cuenta </a></li>
-					<li><a href="#"> Mis pedidos</a></li>
-					<li><a href="#">Ayuda</a></li>
-					<li><a href="#" onclick="mostrarAlerta()">Cerrar cuenta</a></li>
+					<li><a href="../../user/perfil.php?id=<?php echo $Usuario['Id_Persona']?>">Mi cuenta </a></li>
+					<li><a href="misPedidos.php"> Mis pedidos</a></li>
+					<li><a href="contact.html">Ayuda</a></li>
+					<li><a href="#" onclick="CerrarSesion()">Cerrar cuenta</a></li>
 				</ul>
 			</div>
 			<div class="product_list_header">  
@@ -322,6 +322,7 @@ $(document).ready(function(){
 <script src="js/bootstrap.min.js"></script>
 <!-- main slider-banner -->
 <script src="js/skdslider.min.js"></script>
+<script src="../assets/js/cerrarSesion.js"> </script>
 <link href="css/skdslider.css" rel="stylesheet">
 
 <!-- //main slider-banner --> 

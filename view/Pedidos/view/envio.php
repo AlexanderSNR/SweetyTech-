@@ -25,7 +25,7 @@ $Usuario = $_SESSION['usuario'];
 <script type="text/javascript" src="js/move-top.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <!-- start-smoth-scrolling -->
 </head>	
@@ -39,14 +39,14 @@ $Usuario = $_SESSION['usuario'];
 			</div>
 			<div class="agile-login">
 				<ul>
-					<li><a href="registered.html">Mi cuenta </a></li>
-					<li><a href="login.html"> Mis pedidos</a></li>
+					<li><a href="../../user/perfil.php?id=<?php echo $Usuario['Id_Persona']?>">Mi cuenta </a></li>
+					<li><a href="misPedidos.php"> Mis pedidos</a></li>
 					<li><a href="contact.html">Ayuda</a></li>
-					<li><a href="contact.html">Cerrar cuenta</a></li>
+					<li><a href="#" onclick="CerrarSesion()">Cerrar cuenta</a></li>
 				</ul>
 			</div>
 			<div class="product_list_header">  
-					<form action="#" method="post" class="last"> 
+					<form action="carrito.php" method="post" class="last"> 
 						<input type="hidden" name="cmd" value="_cart">
 						<input type="hidden" name="display" value="1">
 						<button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
@@ -168,6 +168,7 @@ $Usuario = $_SESSION['usuario'];
 <script src="js/skdslider.min.js"></script>
 <link href="css/skdslider.css" rel="stylesheet">
 <script src="../assets/js/Ajax/Pedido.js"></script>	
+<script src="../assets/js/cerrarSesion.js"> </script>
 <!-- //main slider-banner --> 
 
 </body>

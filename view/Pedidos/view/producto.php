@@ -266,6 +266,7 @@ function AgregadoCarrito(){
   color: white;
 }
  </style>
+ <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 <!-- header -->
@@ -277,10 +278,10 @@ function AgregadoCarrito(){
 			</div>
 			<div class="agile-login">
 				<ul>
-					<li><a href="registered.html">Mi cuenta</a></li>
-					<li><a href="login.html"> Mis pedidos</a></li>
+				<li><a href="../../user/perfil.php?id=<?php echo $Usuario['Id_Persona']?>">Mi cuenta </a></li>
+					<li><a href="misPedidos.php"> Mis pedidos</a></li>
 					<li><a href="contact.html">Ayuda</a></li>
-					<li><a href="contact.html">Cerrar cuenta</a></li>
+					<li><a href="#" onclick="CerrarSesion()">Cerrar cuenta</a></li>
 				</ul>
 			</div>
 			<div class="product_list_header">  
@@ -431,7 +432,7 @@ Contenido:  Base (Caja de cartón decorativa); Decorativos ( globo  de corazones
 
 <script src="../assets/js/bootstrap.min.js"></script>
 <script src="../assets/js/Carrito.js"></script>
-
+<script src="../assets/js/cerrarSesion.js"> </script>
 
 
 

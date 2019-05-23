@@ -25,12 +25,13 @@ require_once '../controller/util/validarSesion.php';
 <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,100italic,200,200italic,300,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 <script type="text/javascript">
+
 function redireccionar(){
   window.locationf="carrito.php";
 } 
 setTimeout ("redireccionar()", 5000); //tiempo expresado en milisegundos
 </script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>	
 <body>
 <!-- header -->
@@ -43,10 +44,10 @@ setTimeout ("redireccionar()", 5000); //tiempo expresado en milisegundos
 			</div>
 			<div class="agile-login">
 				<ul>
-					<li><a href="registered.html">Mi cuenta </a></li>
+					<li><a href="../../user/perfil.php?id=<?php echo $Usuario['Id_Persona']?>">Mi cuenta </a></li>
 					<li><a href="misPedidos.php"> Mis pedidos</a></li>
 					<li><a href="contact.html">Ayuda</a></li>
-					<li><a href="../../../controller/cerrar_session.php">Cerrar cuenta</a></li>
+					<li><a href="#" onclick="CerrarSesion()">Cerrar cuenta</a></li>
 				</ul>
 			</div>
 			<div class="product_list_header" >  
@@ -183,5 +184,6 @@ setTimeout ("redireccionar()", 5000); //tiempo expresado en milisegundos
 	
 <script src="../assets/js/Ajax/Catalogo.js"></script>
 <script src="../assets/js/Carrito.js"></script>
+<script src="../assets/js/cerrarSesion.js"> </script>
 </body>
 </html>

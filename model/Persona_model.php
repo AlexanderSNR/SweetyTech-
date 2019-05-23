@@ -5,14 +5,14 @@
     protected $Nombre;
     protected $Apellido;
     protected $Direccion; 
-    protected $Telefono; 
+    protected $Telefono;
     protected $Celular; 
     protected $Fecha_Nacimiento; 
     protected $Estado; 	
     protected $Nit_Empresa; 
     protected $Id_Tipo_Persona; 
     protected $Id_Tipo_Documento; 
-    protected $Genero ;
+    protected $Genero;
     //constructor  que invoca los otros Constructores dependiendo de los argumentos del constructor
     public function __CONSTRUCT()
      {
@@ -24,8 +24,8 @@
      }
      
     //constructor para crear una persona tipo  cliente no se incluye el nit_empresa por que no es un proveedor.
-  public function __CONSTRUCT9($Documento_Identificacion,$Nombre,$Apellido,$Direccion,$Telefono,
-  $Celular,$Fecha_Nacimiento,$Id_Tipo_Persona,$Id_Tipo_Documento)
+  public function __CONSTRUCT12($Documento_Identificacion,$Nombre,$Apellido,$Direccion,$Telefono,
+  $Celular,$Estado,$Fecha_Nacimiento,$Id_Tipo_Persona,$Id_Tipo_Documento,$Genero,$nada)
   {
  
   $this->Documento_Identificacion = $Documento_Identificacion;
@@ -35,9 +35,10 @@
   $this->Telefono = $Telefono;
   $this->Celular = $Celular;
   $this->Fecha_Nacimiento = $Fecha_Nacimiento;
-  $this->Estado = 1;
+  $this->Estado = $Estado;
   $this->Id_Tipo_Persona = $Id_Tipo_Persona;
   $this->Id_Tipo_Documento = $Id_Tipo_Documento;
+  $this->Genero = $Genero;
   }
  
       

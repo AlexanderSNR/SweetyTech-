@@ -3,7 +3,7 @@
 require_once '../../model/configuracion.php';
 require_once '../../model/user_model.php';
 require_once '../../model/Persona_model.php';
-session_start();
+
 class User_Controller extends Conexion
 {
     public function ListaDatos()
@@ -32,15 +32,46 @@ class User_Controller extends Conexion
         } catch (Exception $e) {
             die($e->getMessage());
         }
-    } 
+    }
+    
+public function iniciar($usuario,$pass)
+    {    
+    //escapa carecteres especiales 
+     $usuario = $this->conexion->quote($usuario);
+     $pass = $this->conexion->quote($pass);
+     $usu=$usuario;
+     $password=hash('md5',$_POST['pwd']);
+     $iniciar=" call ValidarLogin(:userEmail,:pwd)";
+         try {
+             $resultado = $this->conexion->prepare($iniciar);
+             $resultado->bindParam("userEmail", $usuario,PDO::PARAM_STR) ;
+             $resultado->bindParam("pwd", $password,PDO::PARAM_STR) ;
+             $resultado->execute();
+             $count = $resultado->rowCount();
+             $datos=$resultado->fetch(PDO::FETCH_ASSOC);
+             if($count) {
+             $_SESSION['usuario']= $datos;
+             return $datos['Id_Rol'];
+            }
+            else{
+                return false;
+            } 
+         } catch (Exception $e) {
+             echo $e;
+         }
+}
+            
+        
+    
     public function insertar(Usuariomodel $persona)
     {
         var_dump($persona);
         $insertar="INSERT INTO tbl_persona (Documento_Identificacion,Nombre,Apellido,Direccion,Telefono,
-        Celular,Fecha_Nacimiento,Estado,Id_Tipo_Persona,Id_Tipo_Documento) values (?,?,?,?,?,?,?,?,?,?)";
+        Celular,Fecha_Nacimiento,Estado,Id_Tipo_Persona,Id_Tipo_Documento,Genero) values (?,?,?,?,?,?,?,?,?,?,?)";
         
         try {
             $this->conexion->prepare($insertar)->execute(array(
+                
                 $persona->__GET('Documento_Identificacion'),
                 $persona->__GET('Nombre'),
                 $persona->__GET('Apellido'),
@@ -50,7 +81,8 @@ class User_Controller extends Conexion
                 $persona->__GET('Fecha_Nacimiento'),
                 $persona->__GET('Estado'),
                 $persona->__GET('Id_Tipo_Persona'),
-                $persona->__GET('Id_Tipo_Documento')
+                $persona->__GET('Id_Tipo_Documento'),
+                $persona->__GET('Genero'),
             ));
              
             $Id_Persona = $this->ConsultarPersona($persona->__GET('Documento_Identificacion'));
@@ -64,7 +96,7 @@ class User_Controller extends Conexion
                 
             ));
 
-
+            echo '<script>window.location.href="../../helps/mailRegistro.php?user='.$persona->__GET('Email').'" </script>';
             return true;
         } catch (Exception $e) {
             echo "error al ingresar datos ".$e->getMessage();
@@ -96,12 +128,12 @@ class User_Controller extends Conexion
 
     public function buscar($Id_Persona)
     {
-        $buscar="SELECT * FROM tbl_Persona where Id_Persona=?";
+        $buscar="SELECT pe.Id_Persona, pe.Documento_Identificacion,pe.Nombre ,pe.Apellido,pe.Genero,pe.Direccion ,pe.Telefono ,pe.Celular ,pe.Fecha_Nacimiento,pe.Estado,pe.Id_Tipo_Persona,pe.Nit_Empresa,pe.Id_Tipo_Documento,u.Email,u.Pass FROM tbl_Persona pe join tbl_usuario u on u.id_Persona=pe.Id_Persona where u.Id_Persona=?";
         try {
             $resultado=$this->conexion->prepare($buscar);
             $resultado->execute(array($Id_Persona));
             $datos=$resultado->fetch(PDO::FETCH_OBJ);
-            $persona= new PersonasModel();
+            $persona= new Usuariomodel();
             
                 $persona->__SET('Documento_Identificacion',$datos->Documento_Identificacion);
                 $persona->__SET('Id_Persona',$datos->Id_Persona);
@@ -115,33 +147,46 @@ class User_Controller extends Conexion
                 $persona->__SET('Nit_Empresa',$datos->Nit_Empresa);
                 $persona->__SET('Id_Tipo_Persona',$datos->Id_Tipo_Persona);
                 $persona->__SET('Id_Tipo_Documento',$datos->Id_Tipo_Documento);
+                $persona->__SET('Genero',$datos->Genero);
+                $persona->__SET('Pass',$datos->Pass);
+                $persona->__SET('Email',$datos->Email);
             return $persona;
         } catch (Exception $e) {
             echo "error al buscar ".$e->getMessage();
         }
     }
 
-     public function actualizar(Usuariomodel $persona)
-    {
-        $actualizar="call  ActualizarUser(?,?,?,?,?,?)";
-        try {
-            $this->conexion->prepare($actualizar)->execute(array(
-                
-                $persona->__GET('Nombre'),
-                $persona->__GET('Apellido'),
-                $persona->__GET('Direccion'),
-                $persona->__GET('Telefono'),
-                $persona->__GET('Celular'),
-                $persona->__GET('Documento_Identificacion')
-               
+       public function actualizar(Usuariomodel $persona)
+	{
+		$actualizar="UPDATE tbl_Persona SET Nombre=?,Apellido=?,Direccion=?,Telefono=?,Celular=?,Estado=? WHERE Id_Persona=?" ;
+		try {
+			$this->conexion->prepare($actualizar)->execute(array(
+				
+				$persona->__GET('Nombre'),
+				$persona->__GET('Apellido'),
+				$persona->__GET('Direccion'),
+				$persona->__GET('Telefono'),
+				$persona->__GET('Celular'),
+				$persona->__GET('Estado'),
+				$persona->__GET('Id_Persona')
 
-            ));
-             var_dump($persona);
+			));
+			return true;
 
-        } catch (Exception $e) {
-            echo "error al ingresar datos ".$e->getMessage();
-        }
-    }
+		} catch (Exception $e) {
+			echo "error al ingresar datos ".$e->getMessage();
+		}
+	}
+    
+     public function nuevaPass($id,$cambio,$Email) {
+          $consulta="UPDATE tbl_usuario SET Pass='$cambio' where Id_Persona=$id "; 
+          $this->conexion->prepare($consulta)->execute();
+          echo '<script>window.location.href="../../helps/mailCambio.php?user='.$Email.'" </script>';
+         
+      }
+    
+
+    
     
     public function CambiarEstado($cambio,$id)
 	{
@@ -158,17 +203,6 @@ class User_Controller extends Conexion
 
     
         
-}
-    
-    public function Paginacion()
-	{
-		 $consulta="SELECT * FROM tbl_persona";
-         $resultado=$this->conexion->prepare($consulta);
-         $resultado->execute();
-         $total=$resultado->rowCount();
-         $paginas=$total/2;
-         $paginas=ceil($paginas);
-         return $paginas;       
 }
     
     public function verificarUsuario($Email){

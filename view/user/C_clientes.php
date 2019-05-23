@@ -1,9 +1,11 @@
 <?php 
-
+require_once '../pedidos/controller/util/validarSesion.php';
 require_once '../../controller/user_controller.php';
 require_once '../../controller/TipoDocumento_controller.php';
 require_once '../../model/user_model.php';
 require_once '../../helps/helps.php';
+$Usuario = new Usuariomodel();
+$Usuario = $_SESSION['usuario'];
 $control = new User_controller();
 $control2 = new TipoDocumentoController();
 
@@ -77,23 +79,11 @@ body{
                         <td> <?php echo $r->__GET('Estado')== 1 ? 'Activo' : 'Inactivo';?> </td>
 
                         <td> <a href="estado.php?id=<?php echo $r->Documento_Identificacion; ?>&estado= <?php echo $r->__GET('Estado')?>" class="btn" style="  background: #DB00DB; color:white"><span class="lnr lnr-sync"></span> </a>
-                            <a style=" height:32px;"href="EditarCliente.php?id=<?php echo $r->Id_Persona; ?>" class="btn btn-primary">&#128393; </a>
+                        
                         </td>
                         </tr>
         <?php endforeach; ?>
         </tbody>
-        <tfoot>
-            <tr>
-                        <th>Documento</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Fecha Nacimiento</th>
-                        <th>Fijo</th>
-                        <th>Celular</th>
-                        <th>Estado</th>
-                        <th>Modificar</th>
-            </tr>
-        </tfoot>
     </table>
  
             </div>

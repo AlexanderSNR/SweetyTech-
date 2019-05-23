@@ -26,7 +26,7 @@ $Usuario = $_SESSION['usuario'];
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <link href="../assets/css/loader.css" rel="stylesheet" type="text/css" media="all" />
-
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- start-smoth-scrolling -->
 <script>
 $(document).ready(function(){
@@ -93,10 +93,10 @@ $(document).ready(function(){
 			</div>
 			<div class="agile-login">
 				<ul>
-					<li><a href="registered.html">Mi cuenta </a></li>
-					<li><a href="login.html"> Mis pedidos</a></li>
+				<li><a href="../../user/perfil.php?id=<?php echo $Usuario['Id_Persona']?>">Mi cuenta </a></li>
+					<li><a href="misPedidos.php"> Mis pedidos</a></li>
 					<li><a href="contact.html">Ayuda</a></li>
-					<li><a href="contact.html">Cerrar cuenta</a></li>
+					<li><a href="#" onclick="CerrarSesion()">Cerrar cuenta</a></li>
 				</ul>
 			</div>
 			<div class="product_list_header">  
@@ -205,6 +205,7 @@ $(document).ready(function(){
 
 <!-- Bootstrap Core JavaScript -->
 <script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/cerrarSesion.js"> </script>
 <!-- main slider-banner -->
 
 <!-- //main slider-banner --> 

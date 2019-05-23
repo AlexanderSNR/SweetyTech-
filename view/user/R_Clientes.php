@@ -67,14 +67,13 @@ $control2 = new TipoDocumentoController();
                         </div>
                         <div class="validate-input" data-validate="Correo electronico invalido :Ejemplo@laz.com">
                             <label for="campo" class="lbl-campo"> CORREO<span style="color:red;"> *</span></label>
-                            <input  class="campos"  type="email" name="email" placeholder="Ingrese Correo" id="email">
+                            <input  class="campos"  type="text" name="email" placeholder="Ingrese Correo" id="email">
                         </div>
                         <div class="validate-input" data-validate="El Teléfono fijo es necesario">
                             <label for="campo" class="lbl-campo"> FIJO <span style="color:red;"> *</span></label>
                             <input  class="campos"  type="number" name="Telefono"  placeholder="Ingrese Tel" id="telefono">
                         </div>
                         <div class="validate-input" data-validate="El teléfono celular es necesario">
-
                             <label for="campo" class="lbl-campo"> CELULAR<span style="color:red;"> *</span> </label>
                             <input  class="campos" type="number" name="Celular"  placeholder="Ingrese Cel" id="celular">
                         </div>
@@ -82,7 +81,17 @@ $control2 = new TipoDocumentoController();
                         <div class="validate-input" data-validate="La dirección es necesaria">
                             <label for="campo" class="lbl-campo"> DIRECCION<span style="color:red;">*</span></label>
                             <input  class="campos" type="text" name="Direccion"  placeholder="Ingrese Cel" id="direccion">
+                            
                         </div>
+                        
+                         <label for="campo" class="lbl-campo"> Genero<span style="color:red;"> *</span></label>
+                         
+                        <select name="Genero" class="campos" id="select">
+                            <option value="0">Seleccione un tipo de documento</option>
+                            <option value="F">Femenino</option>
+                            <option value="M">Masculino</option>
+                            
+                        </select>
 
                         <div class="validate-input" data-validate="La contraseña es necesaria">
                             <label for="campo" class="lbl-campo"> CONTRASEÑA<span style="color:red;"> *</span> </label>
@@ -99,8 +108,33 @@ $control2 = new TipoDocumentoController();
                 </div>
 
             </div>
+        <?php 
+                    if (isset($_POST['enviar'])) {
+  
+                        $id= validar_campo($_POST['Documento']);
+                        $nombre= validar_campo($_POST['Nombre']);
+                        $apellido= validar_campo($_POST['Apellido']);
+                        $genero= validar_campo($_POST['Genero']);
+                        $direccion= validar_campo($_POST['Direccion']);
+                        $tel= validar_campo($_POST['Telefono']);
+                        $cel= validar_campo($_POST['Celular']);
+                        $fecha_n= validar_campo($_POST['Fecha_Nacimiento']);
+                        $tipo_doc= validar_campo($_POST['Id_Tipo_Documento']);
+                        $email= validar_campo($_POST['email']);
+                        $pass= validar_campo($_POST['pwd']);
+                        
+                        
+                        $persona = new Usuariomodel($id,$nombre,$apellido,$genero,$direccion,$tel,
+	$cel,$fecha_n,$tipo_doc,$email,$pass,1,2);
+
+                    $control->insertar($persona);
+                             
+                         }
+                             
+
+            
+                    ?>
             <?php include ("../util/Libscripts.php"); ?>
-            <?php include ("../util/footer.php"); ?>
         </div>
     </main>
 

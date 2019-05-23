@@ -1,9 +1,7 @@
 <?php  
-session_start();
 //error_reporting(0);
-$usuario =$_SESSION['usuario'];
-$varsesion = $usuario['Id_Persona'];
-
+require_once '../view/pedidos/controller/util/validarSesion.php';
+$varsesion= $Usuario['Id_Persona'];
 if ($varsesion== null || $varsesion= '' ){
     die();
 }

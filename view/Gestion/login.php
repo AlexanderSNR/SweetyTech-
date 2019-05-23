@@ -36,7 +36,7 @@
             <div class="content-login">
                 <img id="logo" src="../../public/img/logo.png">
                 <h1 id="login_t">Inicia Sesión</h1>
-                <h4 id="login_r">¿No tienes cuenta?<a href="#">Regístrate</a></h4>
+                <h4 id="login_r">¿No tienes cuenta?<a href="registrar_login.php">Regístrate</a></h4>
                 <form >
                     <label for="email" class="lbl-email">Email</label>
                     <input type="email" class="user" id="email" name="email" autocomplete="off">

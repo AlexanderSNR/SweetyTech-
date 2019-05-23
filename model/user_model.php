@@ -17,11 +17,11 @@ class Usuariomodel  extends  PersonasModel
 		}
 	}
 	//constructor para registrar un cliente
-	public function  __CONSTRUCT10($Documento_Identificacion,$Nombre,$Apellido,$Direccion,$Telefono,
-	$Celular,$Fecha_Nacimiento,$Id_Tipo_Documento,$Email,$password){
+	public function  __CONSTRUCT13($Documento_Identificacion,$Nombre,$Apellido,$Genero,$Direccion,$Telefono,
+	$Celular,$Fecha_Nacimiento,$Id_Tipo_Documento,$Email,$password,$Estado,$Id_Tipo_Persona){
 	//invoca el constructor de la clase persona  para registrar un cliente
 	parent::__CONSTRUCT($Documento_Identificacion,$Nombre,$Apellido,$Direccion,$Telefono,
-	$Celular,$Fecha_Nacimiento,2,$Id_Tipo_Documento);
+  $Celular,$Estado,$Fecha_Nacimiento,$Id_Tipo_Persona,$Id_Tipo_Documento,$Genero,0);
 	$this->Email = $Email;
 	$this->password = hash('md5',$password);
 	$this->Id_Rol =2;

@@ -139,6 +139,7 @@ if (isset($_SESSION['usuario'])) {
   }
 	
 </script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <body>
 <!-- header -->
 	<div class="agileits_header">
@@ -148,10 +149,10 @@ if (isset($_SESSION['usuario'])) {
 			</div>
 			<div class="agile-login">
 				<ul>
-					<li><a href="registered.html">Mi cuenta </a></li>
-					<li><a href="login.html"> Mis pedidos</a></li>
+				<li><a href="../../user/perfil.php?id=<?php echo $Usuario['Id_Persona']?>">Mi cuenta </a></li>
+					<li><a href="misPedidos.php"> Mis pedidos</a></li>
 					<li><a href="contact.html">Ayuda</a></li>
-					<li><a href="#" onclick="mostrarAlerta()">Cerrar cuenta</a></li>
+					<li><a href="#" onclick="CerrarSesion()">Cerrar cuenta</a></li>
 				</ul>
 			</div>
 			<div class="product_list_header">  
@@ -173,7 +174,7 @@ if (isset($_SESSION['usuario'])) {
 			<div class="w3ls_logo_products_left">
 				<h1><a href="Catalogo.php">Dulces Momentos</a></h1>
 			</div>
-		
+
 			
 			<div class="clearfix"> </div>
 		</div>
@@ -206,7 +207,7 @@ if (isset($_SESSION['usuario'])) {
 	<div class="breadcrumbs">
 		<div class="container">
 			<ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
-				<li><a href="productos.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Inicio</a></li>
+				<li><a href="catalogo.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Inicio</a></li>
 				<li class="active">Resumen Pedido</li>
 			</ol>
 		</div>
@@ -294,7 +295,7 @@ if (isset($_SESSION['usuario'])) {
 <script src="js/skdslider.min.js"></script>
 <link href="css/skdslider.css" rel="stylesheet">	
 <!-- //main slider-banner --> 
-
+<script src="../assets/js/cerrarSesion.js"> </script>
 
 </body>
 </html>
