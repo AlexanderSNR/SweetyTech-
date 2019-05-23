@@ -50,6 +50,7 @@ class controllerPedido extends Conexion{
                  $id_persona,
                  $hora
                 ));
+               
             $idpedido = $this->ConsultarUltimoPedido($id_persona);
             if($this->RegistrarDetallePedido($idpedido,$productos)){
                 $this->ActualizarExistencias($productos);
@@ -59,40 +60,7 @@ class controllerPedido extends Conexion{
         echo $e;
         }
     }
-    public function ActualizarExistencias($productos){
-        try {
-            $bandera = true;
-         foreach ($productos  as $ancheta) {
-              $insumos = $this->GetInsumos($ancheta->Id_Plantilla,$ancheta->cantidad);
-              if ($insumos != false ) {
-                   foreach ($insumos as $insumo) {
-                       if ($this->ActualizarStockInsumo($insumo['Insumos_Restantes'],$insumo['Codigo_insumo']) == false) {
-                           $bandera = false ;
-                            break;
-                       }
-                   }
-              }
-              if ($bandera == false ) {
-                  break;
-              }
-         }
-        } catch (Exception $e) {
-            echo $e;
-        }
-    }
-    public function ActualizarStockInsumo($stock,$id_insumo){
-        
-        $sql = " call ActualizarStockInsumo(?,?)";
-        try {
-            $this->conexion->prepare($sql)->execute(array(
-                 $stock,
-                 $id_insumo
-                ));
-            return true ;
-        } catch (\Throwable $th) {
-        echo false;
-        }
-    }
+    
     public function GetEdad($fecha_Nacimiento){
         try {
             $fecha_N = new DateTime($fecha_Nacimiento);
@@ -242,6 +210,41 @@ class controllerPedido extends Conexion{
              return $subtotal;
         }else{
             return $producto->Precio * $producto->cantidad;
+        }
+    }
+
+    public function ActualizarExistencias($productos){
+        try {
+            $bandera = true;
+         foreach ($productos  as $ancheta) {
+              $insumos = $this->GetInsumos($ancheta->Id_Plantilla,$ancheta->cantidad);
+              if ($insumos != false ) {
+                   foreach ($insumos as $insumo) {
+                       if ($this->ActualizarStockInsumo($insumo['Insumos_Restantes'],$insumo['Codigo_insumo']) == false) {
+                           $bandera = false ;
+                            break;
+                       }
+                   }
+              }
+              if ($bandera == false ) {
+                  break;
+              }
+         }
+        } catch (Exception $e) {
+            echo $e;
+        }
+    }
+    public function ActualizarStockInsumo($stock,$id_insumo){
+        
+        $sql = " call ActualizarStockInsumo(?,?)";
+        try {
+            $this->conexion->prepare($sql)->execute(array(
+                 $stock,
+                 $id_insumo
+                ));
+            return true ;
+        } catch (Exception $e) {
+          echo $e;
         }
     }
 

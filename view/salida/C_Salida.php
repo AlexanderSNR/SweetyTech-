@@ -6,7 +6,6 @@ $control = new  salida_controller();
 <html lang="en">
 
 <?php require_once ("../util/head.php");?>
-<!--estilos para la tabla -->
 <style>
 .tabla{
     width:80%;
@@ -28,7 +27,6 @@ body{
     color: #DB00DB;
 }
 </style>
-<!--estilos para la tabla -->
 	<body>
 		<?php require_once ("../util/menu.php"); ?>
 
@@ -47,22 +45,21 @@ body{
         <!-- / breadcrumbs -->
 
        
-            
-<div class="tabla">
-    <table id="example" class=" responsive nowrap table table-striped table-bordered" style="width:100%">
-        <thead>
-            <tr>
-                        <th>Código Salida</th>
-                        <th>Insumo</th>
-                        <th>Cantidad que salio</th>
-                        <th>Fecha salida</th>
-                        <th>configuración</th> 
-            </tr>
-        </thead>
-<tbody>
-                    
-                    <?php foreach ($control->listarDatos() as $r):?>
+            <div class="tabla">
+
+                <table id="example" class=" responsive nowrap table table-striped table-bordered" style="width:100%">
+                    <thead class="thead-dark titulos">
+                        <tr>
+                            <th>Codigo Salida</th>
+                            <th>Insumo</th>
+                            <th>Cantidad que salio</th>
+                            <th>Fecha Salida</th>
+                            <th>Configuracion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     <tr>
+					<?php foreach ($control->listarDatos() as $r):?>
                         <td><?php echo $r->__GET('Codigo_Salida'); ?></td>
                         <td><?php echo $r->__GET('Nombre_Insumo'); ?></td>
                         <td><?php echo $r->__GET('cantidad'); ?></td>
@@ -75,31 +72,28 @@ body{
 					</tr>
 					<?php endforeach; ?> 
                     </tbody>
-        <tfoot>
-            <tr>
-                        <th>Código Salida</th>
-                        <th>Insumo</th>
-                        <th>Cantidad que salio</th>
-                        <th>Fecha salida</th>
-                        <th>configuración</th> 
-            </tr>
-        </tfoot>
-    </table>          
-</div>
+                </table>             
+            </div>
+          
+
+        </div>
         
             <?php include ("../util/footer.php"); ?>
- </main>   
+        
 
- <!-- Script para el datatable-->   
- <script>
+        
+  
+           
+    
+            <script>
     $(document).ready(function() {
   $('#example').DataTable({
     language: {
         "decimal": "",
         "emptyTable": "No hay información",
         "info": "Mostrando _START_ a _END_ de _TOTAL_ salidas",
-        "infoEmpty": "Mostrando 0 to 0 of 0 salidas",
-        "infoFiltered": "(Filtrado de _MAX_ total salidas)",
+        "infoEmpty": "Mostrando 0 to 0 of 0 Clientes",
+        "infoFiltered": "(Filtrado de _MAX_ total Clientes)",
         "infoPostFix": "",
         "thousands": ",",
         "lengthMenu": "Mostrar _MENU_ salidas",
@@ -118,9 +112,6 @@ body{
     
   });
 </script>
- <!-- Script para el datatable-->   
-  
-
 </body>
 
 </html>

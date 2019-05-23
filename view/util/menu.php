@@ -2,6 +2,7 @@
 require_once '../../controller/salida_controller.php';
 $stock= new salida_controller();
 ?>
+
 <header>
 
 	<nav>
@@ -15,10 +16,11 @@ $stock= new salida_controller();
 			</li>
 
 			<li class="dropdown">
-				<a>
-					<span class="lnr lnr-alarm icon-1 fa-y-combinator"><?php echo $stock->alertarstock(); ?></span>
+				<a  data-toggle="modal" data-target="#stock">
+					<span class="lnr lnr-alarm icon-1 "><?php echo $stock->alertarstock(); ?></span>
 				</a>
 			</li>
+						
 
 			<li class="dropdown">
 
@@ -127,7 +129,7 @@ $stock= new salida_controller();
 				<a href="../Proveedor/R_Empresa.php" style="text-decoration: none;">
 					<li>REGISTRAR</li>
 				</a>
-				<a href="../Empresa/C_Empresa.php" style="text-decoration: none;">
+				<a href="../Proveedor/C_Empresa.php" style="text-decoration: none;">
 					<li>CONSULTAR</li>
 				</a>
 			</ul>
@@ -160,4 +162,36 @@ function myFunction() {
   }
 }
 </script>
+<div id="stock" class="modal fade" role="dialog">
+                            <div class="modal-dialog modal-lg">
+                                <!-- Contenido de la ventana-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title title">Insumos a punto de agotarse</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table>
+                                            <tr>
+                                                <th>Nombre Producto</th>
+												<th>Cantidad </th>
+												<th>Opciones </th>
+                                            </tr>
+                                            <tbody >   
+												<tr>
+												<?php foreach ($stock->tablastock() as $r):?>
+                        						<td><?php echo $r->__GET('Nombre_Insumo'); ?></td>
+												<td><?php echo $r->__GET('cantidad'); ?></td>
+												<td><a href="" class="btn btn-primary">Agregar</a></td>
+												</tr>   
+												<?php endforeach; ?>                      
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
 

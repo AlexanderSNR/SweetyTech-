@@ -43,7 +43,6 @@ if (isset($_SESSION['usuario'])) {
          $('#Comprar').text("Comprando......");
         },
         success: function(data){
-			console.log(data);
 					if (parseInt(data)!= 0) {
 						  if(parseInt(data) == -1){
 								swal({
@@ -261,7 +260,7 @@ if (isset($_SESSION['usuario'])) {
 </section>
 
 <div class="checkout-right-basket" style="margin: 20px;">
-					<a href="#" id="Comprar"> Comprar</a>
+					<a  id="Comprar"> Comprar</a>
 				</div>
 <!-- resumen -->
 <!-- //footer -->

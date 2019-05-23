@@ -27,7 +27,15 @@ body{
 .page-link:hover{
     color: #DB00DB;
 }
+.iconos{
+width:15px;
+height:15px;
 
+}
+.btn-primary{
+  background-color: #DB00DB;
+    border-color: #DB00DB;
+    
 }
 </style>
 <!--estilos para la tabla -->
@@ -62,7 +70,8 @@ body{
                         <th>Celular</th>
                         <th>Teléfono</th>
                         <th>Recargo</th>
-                        <th>Opciones</th>
+                        <th>Estado</th>
+                        <th>ver comprobante</th>
             </tr>
         </thead>
         <tbody>
@@ -82,14 +91,15 @@ body{
                                 echo "$".$r['Aplicar_recargo'];
                             }else{
                                 ?>
-                              <button type="button" class="btn btn-primary recargo" data-toggle="modal" data-target="#Recargo" id="btn-recargo" onclick="<?php echo "GetId(".$r['Id_Pedido'];?>)" required >Aplicar Recargo </button>
+                              <button type="button" class="btn btn-primary recargo" data-toggle="modal" data-target="#Recargo" id="btn-recargo" onclick="<?php echo "GetId(".$r['Id_Pedido'];?>)" required >Agregar </button>
                             <?php
                             }
                             
                         }else{
                             echo "No aplica";
                         } ?></td>
-                        <td><button type="button" class="btn btn-primary recargo" data-toggle="modal" data-target="#Estados" id="btn-estado" onclick="<?php echo "GetId2(".$r['Id_Pedido'];?>)" required >Cambiar estado </button></td>
+                        <td><center><button type="button" class="btn btn-primary recargo" data-toggle="modal" data-target="#Estados" id="btn-estado" onclick="<?php echo "GetId2(".$r['Id_Pedido'];?>)" required ><img src="../../public/img/actualizar-pagina-opcion.png" alt="" class="iconos" > </button></center></td>
+                        <td><a href="../Pedidos/controller/util/reporte.php?id=<?php echo $r['Id_Pedido'];?>&documento=<?php echo $r['Documento_Identificacion'];?>" target="_blank"><button type="button" class="btn btn-primary btn-small " data-toggle="modal"  ><img src="../../public/img/ojo.png" alt="" class="iconos" > </button></a></td>
                         </tr>
         <?php endforeach; ?>
         </tbody>
@@ -135,7 +145,6 @@ body{
            
            <input type="hidden" name="idPedido" value="0" id="idPedido2">
            <select name="Estado" class="campos" id="estadoId" required>
-                            <option value="0">Seleccione un estado</option>
                             <?php foreach ($control->estadosPedidos() as $r):?>
                             <option value="<?php echo $r['Id_Estado_Pedido'];?>">
                                 <?php echo $r['Nombre'] ?>
@@ -209,7 +218,31 @@ body{
    $("#estado").click(function(){
         var id = $("#idPedido2").val();
         var idestado = $("#estadoId").val();
-        
+        var parametros = {"action":"ajax","option":2,"idPedido2":id,"estado":idestado};
+        $.ajax({
+       url:'../../controller/peticiones_controller.php',
+       type:"post",
+       data: parametros,
+       beforeSend: function(objeto) {
+         $('#estado').text("Actualizando...");
+         },
+       success: function(data){ 
+         console.log(data);
+          var respuesta = parseInt(data);
+          if (respuesta==1) {
+
+            swal("Genial", "Estado actualizado correctamente ", "success");
+            setTimeout(function () {
+              window.location.href = "C_pedidos.php";
+            }, 1000);
+          }else{
+            swal("Lo sentimos", "parace que tenemos problemas ,intenta mas tarde", "error");
+          }
+       } ,
+       error: function(){
+           console.log("Ha ocurrido un error! :(");
+       }
+   });
    });
 }); 
 function GetId(id) {

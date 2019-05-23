@@ -1,11 +1,18 @@
 <?php
-require_once 'validarSesion.php';
+require_once('../controllerReporte.php');
+$Reporte = new controllerReporte();
+if (isset($_GET['documento'])) {
+   $Usuario = $Reporte->ConsultarPersona($_GET['documento']);
+}else{
+   include_once 'validarSesion.php';
+}
+
 require_once('../../assets/pdf/vendor/autoload.php');
 //controlador Reporte
-require_once('../controllerReporte.php');
+
 //codigo css de la plantilla 
 $css = file_get_contents('../../assets/css/pdf.css');
-$Reporte = new controllerReporte();
+
 
 if (isset($_GET['id'])) {
 

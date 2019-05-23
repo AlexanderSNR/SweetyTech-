@@ -47,7 +47,24 @@
            if ( count($resultado) > 0 ) {
                 return $resultado;
            }else {
-                echo "0";
+                return 0;
+           }
+           
+       } catch (\exception $th) {
+           echo($th);
+       }
+    }
+    public function ConsultarPersona($documento){
+        $documento = $this->conexion->quote($documento);
+        $sql="call ConsultarPersona($documento)";
+       try {
+           
+           $resultado = $this->conexion->query($sql);
+           $resultado = $resultado->fetchAll(PDO::FETCH_ASSOC);
+           if ( count($resultado) > 0 ) {
+                return $resultado[0];
+           }else {
+               return 0;
            }
            
        } catch (\exception $th) {

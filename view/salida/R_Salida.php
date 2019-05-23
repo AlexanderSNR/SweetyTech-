@@ -10,28 +10,6 @@ $control = new salida_Controller();
 <html lang="es">
 
 <?php include ("../util/head.php"); ?>
-<style>
-.tabla{
-    width:80%;
-    margin:auto; 
-}
-
-body{
-    overflow-x:hidden;
-}
-.page-item.active .page-link{
-    background-color:#DB00DB;
-    border-color:#DB00DB;
-}
-
-.page-link {
-    color: #DB00DB;
-}
-.page-link:hover{
-    color: #DB00DB;
-}
-</style>
-<!--estilos para la tabla -->
 
 <body>
     <?php include ("../util/menu.php"); ?>
@@ -66,7 +44,7 @@ body{
                         </div>
                         <br>
                         <!-- Boton para la ventana modal  -->
-                        <button type="button" class="btn  btn-primary nextBtn btn-lg" data-toggle="modal" data-target="#myModal">Cargar Insumos</button>
+                        <button type="button" class="btn  btn-primary nextBtn btn-lg" data-toggle="modal" data-target="#myModal">Agregar Insumos</button>
                         <br>
                         <br>  
                         <table class="m-0" >
@@ -158,33 +136,5 @@ body{
 
 </body>
 <script src="../../helps/Validate.js"></script>
-<!-- Script para el datatable-->   
-<script>
-    $(document).ready(function() {
-  $('#example').DataTable({
-    language: {
-        "decimal": "",
-        "emptyTable": "No hay información",
-        "info": "Mostrando _START_ a _END_ de _TOTAL_ salidas",
-        "infoEmpty": "Mostrando 0 to 0 of 0 salidas",
-        "infoFiltered": "(Filtrado de _MAX_ total salidas)",
-        "infoPostFix": "",
-        "thousands": ",",
-        "lengthMenu": "Mostrar _MENU_ salidas",
-        "loadingRecords": "Cargando...",
-        "processing": "Procesando...",
-        "search": "Buscar:",
-        "zeroRecords": "Sin resultados encontrados",
-        "paginate": {
-            "first": "Primero",
-            "last": "Ultimo",
-            "next": "Siguiente",
-            "previous": "Anterior"
-        }
-    }
-});
-    
-  });
-</script>
- <!-- Script para el datatable-->  
+
 </html>
