@@ -18,6 +18,7 @@ class InsumoModel
     private $Nombre_Tipo_Envoltura;
     private $Nombre;
     private $Imagen;
+    private $Nit_Proveedor;
 
 
     public function __GET($atributo){

@@ -6,7 +6,30 @@
     text-decoration: none;
 
 }
+@import url('https://fonts.googleapis.com/css?family=Dancing+Script');
 
+/*//////////////////////////////////////////////////////////////////
+[ FONT ]*/
+
+@font-face {
+    font-family: Poppins-Regular;
+    src: url('../fonts/poppins/Poppins-Regular.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Poppins-Medium;
+    src: url('../fonts/poppins/Poppins-Medium.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Poppins-Bold;
+    src: url('../fonts/poppins/Poppins-Bold.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Poppins-SemiBold;
+    src: url('../fonts/poppins/Poppins-SemiBold.ttf'); 
+  }
 body {
     background: url(../../public/img/flogin.jpg);
 
@@ -15,6 +38,7 @@ body {
 
 main {
     width: 100%;
+  
 
 
 }
@@ -72,7 +96,7 @@ img {
 
 }
 
-.contenedor
+
 
 /*CLIENTE*/
 
@@ -81,7 +105,7 @@ img {
     font-size: 20px;
 }
 
-.content-login .cliente {
+.content-login .campos {
     width: 100%;
     border-style: none;
     outline: 0px;
@@ -342,7 +366,69 @@ select {
 .label__checkbox {
     display: none;
 }
+/*------------------------------------------------------------------
+ Alert validate */
+ .validate-input {
+    position: relative;
+  }
 
+.alert-validate::before {
+  content: attr(data-validate);
+  position: absolute;
+  max-width: 70%;
+  background-color: #fff;
+  border: 1px solid #c80000;
+  border-radius: 2px;
+  padding: 4px 25px 4px 10px;
+  top: 58%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  right: 2px;
+  pointer-events: none;
+
+ 
+  color: #c80000;
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: left;
+
+  visibility: hidden;
+  opacity: 0;
+
+  -webkit-transition: opacity 0.4s;
+  -o-transition: opacity 0.4s;
+  -moz-transition: opacity 0.4s;
+  transition: opacity 0.4s;
+}
+.validate-input{
+    width: 97%;
+}
+.alert-validate::after {
+  content: "\f06a";
+  font-family: FontAwesome;
+  display: block;
+  position: absolute;
+  color: #c80000;
+  font-size: 16px;
+  top: 58%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  right: 1px;
+}
+
+.alert-validate:hover:before {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+/*--------------------------------responsive */
 
 /*resposive de login*/
 

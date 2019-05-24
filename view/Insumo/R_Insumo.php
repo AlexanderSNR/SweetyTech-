@@ -27,6 +27,15 @@ $Empresa = new EmpresaController();
 #imagen_insumo{
   width:80%;
 }
+.file-preview-image{
+  width:234px;
+  margin: auto;
+
+}.file-preview-frame{
+  margin:auto;
+  float:none;
+}
+
 </style>
 
 <body>
@@ -52,9 +61,7 @@ $Empresa = new EmpresaController();
 
           <!----------------------------- Formulario de registro -------------------------->
 
-            <form action="R_Insumo.php" method="post">
-
-                <form action="R_Insumo.php" method="post" enctype="multipart/form-data">
+                <form action="#" method="post" enctype="multipart/form-data">
 
                 <div >
                   <label for="campo" class="lbl-campo">Nombre Insumo: <span style="color:red;"> *</span></label>
@@ -88,11 +95,6 @@ $Empresa = new EmpresaController();
                 <div >
                   <label for="campo" class="lbl-campo">Stockminimo: <span style="color:red;"> *</span></label>
                   <input type="number" class="campos" id="campo" name="StockMinimo" >
-                </div>
-
-                <div >
-                  <label for="campo" class="lbl-campo">Cantidad: <span style="color:red;"> *</span></label>
-                  <input type="number" class="campos" id="campo" name="Cantidad" >
                 </div>
 
               <!---------------------------------  Select Categorias ---------------------------->
@@ -154,59 +156,46 @@ $Empresa = new EmpresaController();
         <?php
 
 if (isset($_POST['Registrar'])) {
-  if (!empty($_POST['Nombre_Insumo']) && !empty($_POST['Nit_Empresa'])  && !empty($_POST['Precio_Entrada']) && !empty($_POST['Precio_Cliente']) && 
-  !empty($_POST['StockMinimo']) && !empty($_POST['Cantidad']) && !empty($_POST['id_Categoria']) && !empty($_POST['Id_Tamano']) && 
-  !empty($_POST['Id_Tipo_Envoltura']) && !empty($_POST['Imagen']) ) {
-    
-    $destinourl = "ImagenInsumo/".basename($_FILES['Imagen']['name']);
-    move_uploaded_file($_FILES['Imagen']['tmp_name'],$destinourl);  
 
     $Insumo->__SET('Nombre_Insumo',$_POST['Nombre_Insumo']);
     $Insumo->__SET('Nit_Empresa',$_POST['Nit_Empresa']);
     $Insumo->__SET('Precio_Entrada',$_POST['Precio_Entrada']);
     $Insumo->__SET('Precio_Cliente',$_POST['Precio_Cliente']);
     $Insumo->__SET('StockMinimo',$_POST['StockMinimo']);
-    $Insumo->__SET('Cantidad',$_POST['Cantidad']);
     $Insumo->__SET('id_Categoria',$_POST['id_Categoria']);
     $Insumo->__SET('Id_Tamano',$_POST['Id_Tamano']);
     $Insumo->__SET('Id_Tipo_Envoltura',$_POST['Id_Tipo_Envoltura']);
-    $Insumo->__SET('Imagen',$destinourl);
+    $Insumo->__SET('Imagen',$_FILES['Imagen']['name']);
+    $destinourl = "../../public/img/insumos/".$_FILES['Imagen']['name'];
+    move_uploaded_file($_FILES['Imagen']['tmp_name'],$destinourl); 
 
+    if($ControlInsumo->Insertar($Insumo)){
 
-
-if($ControlInsumo->Insertar($Insumo)){
-
-  echo '<script type="text/javascript">
-  swal({
-title: "REGISTRO",
-text: "Realizado con exito!",
-type: "success",
-confirmButtonColor: "#DB00DB",
-confirmButtonText: "OK!"
-},
-function(){
-window.location.href="C_Insumo.php";
-});
-</script>';
-} 
-else {
-echo '<script type="text/javascript">
-swal({
-title: "ERROR",
-text: "Por favor llenar los Campos!",
-type: "warning",
-confirmButtonColor: "#ce3a1e",
-confirmButtonText: "OK!",
-closeOnConfirm: false
-});
-</script>';
-}
-
-}
-
-}else{
-
-echo 'Debe llenar el formulario.';
+      echo '<script type="text/javascript">
+      swal({
+    title: "REGISTRO",
+    text: "Realizado con exito!",
+    type: "success",
+    confirmButtonColor: "#DB00DB",
+    confirmButtonText: "OK!"
+    },
+    function(){
+    window.location.href="C_Insumo.php";
+    });
+    </script>';
+    } 
+    else {
+    echo '<script type="text/javascript">
+    swal({
+    title: "ERROR",
+    text: "Por favor llenar los Campos!",
+    type: "warning",
+    confirmButtonColor: "#ce3a1e",
+    confirmButtonText: "OK!",
+    closeOnConfirm: false
+    });
+    </script>';
+    }
 
 }
        

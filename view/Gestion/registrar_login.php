@@ -17,6 +17,7 @@ $control2 = new TipoDocumentoController();
     <link rel="stylesheet" href="../../public/css/Estilos.css">
     <link rel="stylesheet" href="../../public/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../public/librerias/icon/style.css">
+    <link rel="stylesheet" href="../../public/librerias/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="../../public/librerias/notify/sweetalert.css"> 
     
 
@@ -35,7 +36,7 @@ $control2 = new TipoDocumentoController();
                 <img id="logo" src="../../public/img/logo.png">
                 <h1 id="login_t">Registrar</h1>
                  <h4 id="login_r">¿Ya tienes cuenta?<a href="login.php">Inicia Sesión</a></h4>
-                <form action="#" method="POST">
+                <form action="#" method="POST" class="validate-form">
                   
                    <label for="campo" class="lbl-Cliente"> TIPO DOCUMENTO<span style="color:red;"> *</span></label>
                     <div class="validate-input" data-validate="Es necesario seleccionar un tipo documento">
@@ -52,49 +53,49 @@ $control2 = new TipoDocumentoController();
                    
                      <div class="validate-input" data-validate="Documento Es necesario o no es un número">
                             <label class="lbl-Cliente"> DOCUMENTO <span style="color:red;"> *</span></label>
-                            <input  class="cliente" type="number" name="Documento" id="documento" placeholder="Ingrese Documento">
+                            <input  class="campos" type="number" name="Documento" id="documento" placeholder="Ingrese Documento">
                      </div>
                      
                        <div class="validate-input" data-validate="El nombre es necesario">
                             <label class="lbl-Cliente"> NOMBRE <span style="color:red;"> *</span></label>
-                            <input  class="cliente" type="text"  name="Nombre" placeholder="Ingrese Nombre" id="nombre">
+                            <input  class="campos" type="text"  name="Nombre" placeholder="Ingrese Nombre" id="nombre">
                      </div>
                      
                      <div class="validate-input" data-validate="El apellido es necesario">
                             <label class="lbl-Cliente"> APELLIDO <span style="color:red;"> *</span></label>
-                            <input  class="cliente" type="text" name="Apellido"  placeholder="Ingrese Apellido" id="apellido">
+                            <input  class="campos" type="text" name="Apellido"  placeholder="Ingrese Apellido" id="apellido">
                      </div>
                      
                        <div class="validate-input" data-validate="La fecha de nacimiento es necesaria">
                             <label class="lbl-Cliente"> FECHA DE NACIMIENTO <span style="color:red;"> *</span></label>
-                            <input  class="cliente"  type="date" name="Fecha_Nacimiento"  placeholder="Ingrese Correo" id="fecha">
+                            <input  class="campos"  type="date" name="Fecha_Nacimiento"  placeholder="Ingrese Correo" id="fecha">
                      </div>
                      
                      <div class="validate-input" data-validate="Correo electronico invalido :Ejemplo@laz.com">
                             <label class="lbl-Cliente"> CORREO <span style="color:red;"> *</span></label>
-                            <input  class="cliente" type="text" name="email" placeholder="Ingrese Correo" id="correo">
+                            <input  class="campos" type="text" name="email" placeholder="Ingrese Correo" id="correo">
                      </div>
                      
                       <div class="validate-input" data-validate="El Teléfono fijo es necesario">
                             <label class="lbl-Cliente"> FIJO <span style="color:red;"> *</span></label>
-                            <input  class="cliente"  type="number" name="Telefono" id="telefono" placeholder="Ingrese Tel">
+                            <input  class="campos"  type="number" name="Telefono" id="telefono" placeholder="Ingrese Tel">
                      </div>
                      
                      
                        <div class="validate-input" data-validate="El teléfono celular es necesario">
                             <label class="lbl-Cliente"> CELULAR <span style="color:red;"> *</span></label>
-                            <input  class="cliente" type="number" name="Celular"  placeholder="Ingrese Cel" id="celular">
+                            <input  class="campos" type="number" name="Celular"  placeholder="Ingrese Cel" id="celular">
                      </div>
                      
                      <div class="validate-input" data-validate="La dirección es necesaria">
                             <label class="lbl-Cliente"> DIRECCION <span style="color:red;"> *</span></label>
-                            <input  class="cliente" type="text" name="Direccion"  placeholder="Ingrese Cel" id="direccion">
+                            <input  class="campos" type="text" name="Direccion"  placeholder="Ingrese Cel" id="direccion">
                      </div>
                      
                      
                          <div class="validate-input" data-validate="La contraseña es necesaria">
                             <label class="lbl-Cliente"> CONTRASEÑA <span style="color:red;"> *</span></label>
-                            <input  class="cliente" type="password" name="pwd"  placeholder="Ingrese Contraseña" id="pwd">
+                            <input  class="campos" type="password" name="pwd"  placeholder="Ingrese Contraseña" id="pwd">
                      </div>
                      
                              <div class="validate-input" data-validate="El Genero es necesario">
@@ -123,7 +124,7 @@ $control2 = new TipoDocumentoController();
     <script src="https://.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="../../public/js/animaciones.js"></script>
     <script src="../../public/js/bootstrap.js"></script>
- 
+    <script src="../../helps/Validate.js"></script>
 
    
 

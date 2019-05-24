@@ -20,8 +20,23 @@ $resultado=$controlInsumo->buscar($_GET['Codigo_insumo']);
  <!DOCTYPE html>
 <html lang="en">
 
+<link rel="stylesheet" href="../../public/css/fileinput.min.css">
 	<?php require_once ("../util/head.php");?>
+ 
+  <style>
+#imagen_insumo{
+  width:80%;
+}
+.file-preview-image{
+  width:234px;
+  margin: auto;
 
+}.file-preview-frame{
+  margin:auto;
+  float:none;
+}
+
+</style>
 	<body>
 		<?php require_once ("../util/menu.php"); ?>
  
@@ -45,54 +60,56 @@ $resultado=$controlInsumo->buscar($_GET['Codigo_insumo']);
 		<div class="container" style="width: 100%;">
 					<div class="content-form col-md-12">
 
-						<form action="" method="post">
+						<form action="" method="post" enctype="multipart/form-data">
 
-<div class="form-group">
-  <label for="">Codigo Insumo: </label>
-<input type="number" class="form-control" name="Codigo_insumo" id="campo" value="<?php echo $resultado->Codigo_insumo;?>" disabled >
-  </div>
 
-<div class="form-group">
-  <label for="">Nombre Insumo: </label>
-  <input type="text" class="form-control" id="campo" name="Nombre_Insumo" value="<?php echo $resultado->Nombre_Insumo;?>"  >
-</div>
+  <label for="" class="lbl-campo">Codigo Insumo: </label>
+<input type="number" class="campos" name="Codigo_insumo"  value="<?php echo $resultado->Codigo_insumo;?>" disabled >
 
-<div class="form-group">
-  <label for="">Empresa: </label>    
-    <select id="campo" class="form-control" name="Nit_Empresa" >
-    <option selected><?php echo $resultado->Nombre;?></option>
+
+
+<label for="campo" class="lbl-campo">Nombre Insumo: <span style="color:red;"> *</span></label>
+  <input type="text" class="campos" name="Nombre_Insumo" value="<?php echo $resultado->Nombre_Insumo;?>"  >
+
+
+  <label for="" class="lbl-campo">Empresa: </label>    
+    <select id="campo" class="campos" name="Nit_Proveedor">
+    <option   value ="<?php  echo $resultado->Nit_Proveedor;?>" selected><?php echo $resultado->Nombre;?></option>
       <?php          
 				foreach ($Empresa->Listar() as $r):?>
-        <option value="<?php echo $r->__GET('Nit_Empresa'); ?>">
+        <?php if ($r->__GET('Nit_Empresa') != $resultado->Nit_Proveedor ) {
+            ?>
+          <option value="<?php echo $r->__GET('Nit_Empresa')  ?>">
         <?php echo $r->__GET('Nombre'); ?></option>
+          <?php
+        } 
+        ?>
+        
         <?php endforeach; ?>
     </select>
 
-    </div>
 
-<div class="form-group">
-  <label for="">Precio Entrada: </label>
-  <input type="number" class="form-control" id="campo" name="Precio_Entrada" value="<?php echo $resultado->Precio_Entrada;?>" >
-</div>
+  <label for="" class="lbl-campo">Precio Entrada: </label>
+  <input type="number" class="campos" id="campo" name="Precio_Entrada" value="<?php echo $resultado->Precio_Entrada;?>" >
 
-<div class="form-group">
-  <label for="">Precio Cliente: </label>
-  <input type="number" class="form-control" id="campo" name="Precio_Cliente" value="<?php echo $resultado->Precio_Cliente;?>"  >
-</div>
 
-<div class="form-group">
-  <label for="">StockMinimo: </label>
-  <input type="number" class="form-control" id="campo" name="StockMinimo" value="<?php echo $resultado->StockMinimo;?>"  >
-</div>
 
-<div class="form-group">
-  <label for="">Cantidad: </label>
-  <input type="number" class="form-control" id="campo" name="Cantidad" value="<?php echo $resultado->Cantidad;?>"  >
-</div>
+  <label for="" class="lbl-campo">Precio Cliente: </label>
+  <input type="number" class="campos" id="campo" name="Precio_Cliente" value="<?php echo $resultado->Precio_Cliente;?>"  >
 
-<div class="form-group">
-  <label for="">Categoria: </label>    
-    <select id="campo" class="form-control" name="id_Categoria" >
+
+
+  <label for="" class="lbl-campo">StockMinimo: </label>
+  <input type="number" class="campos" id="campo" name="StockMinimo" value="<?php echo $resultado->StockMinimo;?>"  >
+
+
+
+  <label for="" class="lbl-campo">Cantidad: </label>
+  <input type="number" class="campos" id="campo" name="Cantidad" value="<?php echo $resultado->Cantidad;?>"  >
+
+
+  <label for="" class="lbl-campo">Categoria: </label>    
+    <select id="campo" class="campos" name="id_Categoria" >
     <option selected><?php echo $resultado->Nombre_Categoria;?></option>
       <?php          
 				foreach ($Categoria->Listar() as $r):?>
@@ -101,47 +118,57 @@ $resultado=$controlInsumo->buscar($_GET['Codigo_insumo']);
         <?php endforeach; ?>
     </select>
 
-    </div>
 
 
-<div class="form-group">
-  <label for="">Tamaño: </label>
-  <select id="campo" class="form-control" name="Id_Tamano">
+
+  <label for="" class="lbl-campo">Tamaño: </label>
+  <select id="campo" class="campos" name="Id_Tamano">
     <option value="<?php echo $resultado->Nombre_Tamano;?>" selected><?php echo $resultado->Nombre_Tamano;?></option>
     <?php 
 				foreach ($Tamano->Listar() as $r):?>
         <option value="<?php echo $r->__GET('Id_Tamano'); ?>">
         <?php echo $r->__GET('Nombre_Tamano'); ?></option>
         <?php endforeach; ?>
-    </select></div>
+    </select>
 
-<div class="form-group">
-  <label for="">Tipo Envoltura: </label>
-  <select id="campo" class="form-control" name="Id_Tipo_Envoltura" >
+
+  <label for="" class="lbl-campo">Tipo Envoltura: </label>
+  <select id="campo" class="campos" name="Id_Tipo_Envoltura" >
   <option selected><?php echo $resultado->Nombre_Tipo_Envoltura;?></option>
     <?php 
 				foreach ($TipoEnvoltura->Listar() as $r):?>
         <option value="<?php echo $r->__GET('Id_Tipo_Envoltura'); ?>">
         <?php echo $r->__GET('Nombre_Tipo_Envoltura'); ?></option>
         <?php endforeach; ?>
-    </select></div>
+    </select>
+    <br>
+<div>
+<img src="../../public/img/insumos/<?php echo $resultado->Imagen;?>" alt="No hay imagen" style="margin-left:35%; width:200px; height: 200px;" >
+</div>
 
-<div class="form-group">
-    <label for="campo" class="lbl-campo"> Imagen: </label>
-    <input type="file" class="form-control-file" name="Imagen" value="<?php echo $resultado->Imagen;?>">
- </div>
+                 <div id="imagen_insumo">
+                    <label for="campo" class="lbl-campo"> Imagen: </label>
+                    <input type="file" name="Imagen" id="archivos" value="../../public/img/insumos/<?php echo $resultado->Imagen;?>" >
+                </div>
 
 
-  <input type="submit" class="btn btn-primary" value="Actualizar" name ="Actualizar">
+                <input type="submit" class="btn btn-primary nextBtn btn-lg pull-right" type="button"  style="float: right; margin-right:3%; margin-top:2%;" value="Actualizar" name ="Actualizar">
 
 </form>
 </div>
 <?php
 
 if (isset($_POST['Actualizar'])) {
-       
+
+  if ($_FILES['Imagen']['name']==null){
+    $imagen=$resultado->Imagen;
+  }else {
+    $imagen=$_FILES['Imagen']['name'];
+  }
+  $destinourl = "../../public/img/insumos/".$_FILES['Imagen']['name'];
+  move_uploaded_file($_FILES['Imagen']['tmp_name'],$destinourl); 
   $Insumo->__SET('Codigo_insumo', $_GET['Codigo_insumo']);
-  $Insumo->__SET('Nit_Empresa',$_POST['Nit_Empresa']);
+  $Insumo->__SET('Nit_Proveedor',$_POST['Nit_Proveedor']);
   $Insumo->__SET('Nombre_Insumo',$_POST['Nombre_Insumo']);
   $Insumo->__SET('Precio_Cliente',$_POST['Precio_Entrada']);
   $Insumo->__SET('Precio_Cliente',$_POST['Precio_Cliente']);		
@@ -150,49 +177,26 @@ if (isset($_POST['Actualizar'])) {
   $Insumo->__SET('id_Categoria',$_POST['id_Categoria']);
   $Insumo->__SET('Id_Tamano',$_POST['Id_Tamano']);
   $Insumo->__SET('Id_Tipo_Envoltura',$_POST['Id_Tipo_Envoltura']);
-  $Insumo->__SET('Imagen',$_POST['Imagen']);
-      
+  $Insumo->__SET('Imagen',$imagen);
+ 
+print_r($Insumo);
 
-  
-     
+  $controlInsumo->actualizar($Insumo);
 
-     if($controlInsumo->actualizar($Insumo)){
-
-      echo '<script type="text/javascript">
-  swal({
-title: "ACTUALIZACION",
-text: "Realizada con exito!",
-type: "success",
-confirmButtonColor: "#DB00DB",
-confirmButtonText: "OK!"
-},
-function(){
-window.location.href="C_Insumo.php";
-});
-</script>';
-} 
-else {
-echo '<script type="text/javascript">
-swal({
-title: "ERROR",
-text: "Por favor llenar los Campos!",
-type: "warning",
-confirmButtonColor: "#ce3a1e",
-confirmButtonText: "OK!",
-closeOnConfirm: false
-});
-</script>';
-}
-
-
-
-  }else{
-
-
-  echo 'Debe llenar el formulario.';
 
 }
 
 ?>
+<script src="../../public/js/fileinput.min.js"></script>
+<script>
+$("#archivos").fileinput({
+  uploadUrl:"upload.php",
+  uploadAsync:false,
+  minFileCount:1,
+  maxFileCount:1,
+  showUpload:false,
+  showRemove:false
+});
+</script>
 </body>
 </html>

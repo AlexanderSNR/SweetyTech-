@@ -52,7 +52,7 @@ class InsumoController extends conexion
 public function Insertar(InsumoModel $Insumo)
 {
  $Insertar="INSERT INTO tbl_insumo (Codigo_insumo,  Nombre_Insumo, Precio_Entrada, 
- Precio_Cliente, StockMinimo,id_Categoria, Id_Tamano, Id_Tipo_Envoltura,Nit_Proveedor,cantidad,Imagen) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+ Precio_Cliente, StockMinimo,id_Categoria, Id_Tamano, Id_Tipo_Envoltura,Nit_Proveedor,Imagen) VALUES (?,?,?,?,?,?,?,?,?,?)";
  try{
    $this->conexion->prepare($Insertar)->execute(array(
     $Insumo->__GET('Codigo_insumo'),
@@ -64,7 +64,6 @@ public function Insertar(InsumoModel $Insumo)
     $Insumo->__GET('Id_Tamano'),
     $Insumo->__GET('Id_Tipo_Envoltura'),
     $Insumo->__GET('Nit_Empresa'),
-    $Insumo->__GET('Cantidad'),
     $Insumo->__GET('Imagen')
    ));
    return true;
@@ -80,10 +79,10 @@ public function buscar($Codigo_insumo)
 {
   $buscar="SELECT I.Codigo_insumo, I.Nombre_Insumo, E.Nombre, I.Precio_Entrada, I.Precio_Cliente, 
   I.StockMinimo, I.Cantidad, C.Nombre_Categoria, T.Nombre_Tamano, TI.Nombre_Tipo_Envoltura, I.Imagen 
-  FROM tbl_insumo I INNER JOIN tbl_categoria C ON I.id_Categoria=C.Id_Categoria 
+  ,I.Nit_Proveedor FROM tbl_insumo I INNER JOIN tbl_categoria C ON I.id_Categoria=C.Id_Categoria 
   INNER JOIN tbl_Tamano T ON I.Id_Tamano=T.Id_Tamano
   INNER JOIN tbl_tipo_envoltura TI ON I.Id_Tipo_Envoltura=TI.Id_Tipo_Envoltura 
-  INNER JOIN tbl_empresa E ON I.Nit_Empresa=E.Nit_Empresa WHERE Codigo_insumo=? 
+  INNER JOIN tbl_empresa E ON I.Nit_Proveedor=E.Nit_Empresa WHERE Codigo_insumo=? 
   ORDER BY Codigo_insumo DESC";
 
   try{
@@ -104,6 +103,7 @@ public function buscar($Codigo_insumo)
     $Insumo->__SET('Nombre_Tamano',$dato->Nombre_Tamano);
     $Insumo->__SET('Nombre_Tipo_Envoltura',$dato->Nombre_Tipo_Envoltura);
     $Insumo->__SET('Imagen',$dato->Imagen);
+    $Insumo->__SET('Nit_Proveedor',$dato->Nit_Proveedor);
     
     
 
@@ -118,8 +118,8 @@ public function buscar($Codigo_insumo)
 
 public function actualizar(InsumoModel $Insumo)
 {
-  $insertar="UPDATE tbl_insumo SET Nombre_Insumo=?, Nit_Empresa=?,  Precio_Entrada=?, Precio_Cliente=?, 
-  StockMinimo=?, Cantidad=?, id_Categoria=?, Id_Tamano=?, Id_Tipo_Envoltura=?, Imagen=?  
+  $insertar="UPDATE tbl_insumo SET Nombre_Insumo=?, Nit_Proveedor=?,  Precio_Entrada=?, Precio_Cliente=?, 
+  StockMinimo=?, id_Categoria=?, Id_Tamano=?, Id_Tipo_Envoltura=?, Imagen=?  
    WHERE Codigo_insumo=? ";
 
   try{
@@ -128,20 +128,18 @@ public function actualizar(InsumoModel $Insumo)
      
              
                $Insumo->__GET('Nombre_Insumo'),
-               $Insumo->__GET('Nit_Empresa'),
+               $Insumo->__GET('Nit_Proveedor'),
                $Insumo->__GET('Precio_Entrada'),
                $Insumo->__GET('Precio_Cliente'),  
                $Insumo->__GET('StockMinimo'),
-               $Insumo->__GET('Cantidad'),
                $Insumo->__GET('id_Categoria'),
                $Insumo->__GET('Id_Tamano'),  
                $Insumo->__GET('Id_Tipo_Envoltura'),
                $Insumo->__GET('Codigo_insumo'),
                $Insumo->__GET('Imagen') 
-               
-    
 
    ));
+   echo "estoy aqui";
 
      return true;
 

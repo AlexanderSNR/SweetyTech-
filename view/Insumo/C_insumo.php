@@ -30,6 +30,7 @@ body{
     color: #DB00DB;
 }
 </style>
+
 <!--estilos para la tabla -->
 	<body>
 		<?php include ("../util/menu.php"); ?>
@@ -61,6 +62,7 @@ body{
 							<th>Categoria</th>
 							<th>Tamaño</th>
 							<th>Envoltura</th>
+							<th>Estado</th>
 							<th>Imagen</th>
 							<th>Editar</th>
 							<th>Cambiar Estado</th>
@@ -75,44 +77,29 @@ body{
 							<td><?php echo $fila->Precio_Entrada; ?> </td>
 							<td><?php echo $fila->Precio_Cliente; ?> </td>
 							<td><?php echo $fila->StockMinimo; ?> </td>
-							<td><?php echo $fila->Cantidad; ?> </td>
+							<td><?php echo $fila->Cantidad == null ? 0 :$fila->Cantidad ; ?> </td>
 							<td><?php echo $fila->Nombre_Categoria; ?> </td>
 							<td><?php echo $fila->Nombre_Tamano; ?> </td>	
 							<td><?php echo $fila->Nombre_Tipo_Envoltura; ?> </td>
-							<td><img src="<?php echo $fila->Imagen; ?>" alt="No hay imagen" style="width:60px; height:60px;"> </td>
+							<td><?php echo $fila->Estado == 0 ? "Inactivo" : "Activo"; ?> </td>
+							<td><img src="../../public/img/insumos/<?php echo $fila->Imagen; ?>" alt="<?php echo $fila->Imagen == null ? "No hay imagen" : $fila->Nombre_Insumo;?>" style="width:60px; height:60px;" id="myImg" > </td>
 							
 
-							<td><a href="E_Insumo.php?Codigo_insumo=<?php echo $fila->Codigo_insumo;?>" class="btn btn-primary">Editar</a></td>
+							<td><a href="E_Insumo.php?Codigo_insumo=<?php echo $fila->Codigo_insumo;?>" class="btn btn-primary"><span class="lnr lnr-pencil"></span></a></td>
 							<?php 
 							if($fila->__GET('Estado')==1){?>
-							<td><a href="Desactivar.php?Codigo_insumo=<?php echo $fila->Codigo_insumo;?>" class="btn btn-danger"></a></td>
+							<td><a href="Desactivar.php?Codigo_insumo=<?php echo $fila->Codigo_insumo;?>" class="btn btn-danger" style="  background: #DB00DB; color:white;border-color:#DB00DB;" ><span class="lnr lnr-sync"></span></a></td>
 							<?php }else if($fila->__GET('Estado')==0){?>
-							<td><a href="Activar.php?Codigo_insumo=<?php echo $fila->Codigo_insumo;?>" class="btn btn-primary"></a></td>
+							<td><a href="Activar.php?Codigo_insumo=<?php echo $fila->Codigo_insumo;?>" class="btn btn-primary" style="  background: #DB00DB; color:white;border-color:#DB00DB;"><span class="lnr lnr-sync"></span></a></td>
 							<?php }?>
 						</tr>
 					<?php endforeach; ?>
 					</tbody>
-        <tfoot>
-            <tr>
-							<th>Insumo</th>
-							<th>Nombre empresa</th>
-							<th>Precio Entrada</th>
-							<th>Precio Cliente</th> 
-							<th>Stockminimo </th>
-							<th>Cantidad</th>
-							<th>Categoria</th>
-							<th>Tamaño</th>
-							<th>Envoltura</th>
-							<th>Imagen</th>
-							<th>Editar</th>
-							<th>Cambiar Estado</th>
-            </tr>
-        </tfoot>
     </table>  
 
 </div>
 		</main>
-		<!-- Script para el datatable-->   
+<!-- Script para el datatable-->   
  <script>
     $(document).ready(function() {
   $('#example').DataTable({
@@ -140,5 +127,6 @@ body{
     
   });
 </script>
+<script src="../../public/js/reviewImagen.js"></script>
 			</body>
 		</html>

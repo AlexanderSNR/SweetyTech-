@@ -48,7 +48,7 @@ $resultado=$control->buscar($_GET['id']);
             </div>
             <div class="agile-login">
                 <ul>
-                    <li><a href="registered.html">Mi cuenta </a></li>
+                    <li><a href="">Mi cuenta </a></li>
                     <li><a href="login.html"> Mis pedidos</a></li>
                     <li><a href="contact.html">Ayuda</a></li>
                     <li><a href="contact.html">Cerrar cuenta</a></li>
@@ -320,9 +320,9 @@ $resultado=$control->buscar($_GET['id']);
                     <div class="content-form col-md-12">
                         <form action=" " method="post">
                             <label for="campo" class="lbl-campo"> Nueva Contraseña</label>
-                            <input  type="Passwordd" name="np" class="campos" placeholder="Ingrese contraseña" required autofocus>
+                            <input  type="Password" name="np" class="campos" placeholder="Ingrese contraseña" required autofocus>
                             <label for="campo" class="lbl-campo"> Confirmar Contraseña</label>
-                           <input  type="Passwordd" name="cp" class="campos" placeholder="Ingrese contraseña" required autofocus>
+                           <input  type="Password" name="cp" class="campos" placeholder="Ingrese contraseña" required autofocus>
                             <div class="col-md-12" style="margin-top:5%;">
                                 <input type="submit" class="btn btn-primary nextBtn btn-lg pull-right" type="button" name="enviar" value="Cambiar" style="float: right;background:#DB00DB;">
                             </div>
