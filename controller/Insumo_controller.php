@@ -79,7 +79,7 @@ public function buscar($Codigo_insumo)
 {
   $buscar="SELECT I.Codigo_insumo, I.Nombre_Insumo, E.Nombre, I.Precio_Entrada, I.Precio_Cliente, 
   I.StockMinimo, I.Cantidad, C.Nombre_Categoria, T.Nombre_Tamano, TI.Nombre_Tipo_Envoltura, I.Imagen 
-  ,I.Nit_Proveedor FROM tbl_insumo I INNER JOIN tbl_categoria C ON I.id_Categoria=C.Id_Categoria 
+  ,I.Nit_Proveedor,I.id_Categoria,I.Id_Tamano,I.Id_Tipo_Envoltura FROM tbl_insumo I INNER JOIN tbl_categoria C ON I.id_Categoria=C.Id_Categoria 
   INNER JOIN tbl_Tamano T ON I.Id_Tamano=T.Id_Tamano
   INNER JOIN tbl_tipo_envoltura TI ON I.Id_Tipo_Envoltura=TI.Id_Tipo_Envoltura 
   INNER JOIN tbl_empresa E ON I.Nit_Proveedor=E.Nit_Empresa WHERE Codigo_insumo=? 
@@ -104,7 +104,9 @@ public function buscar($Codigo_insumo)
     $Insumo->__SET('Nombre_Tipo_Envoltura',$dato->Nombre_Tipo_Envoltura);
     $Insumo->__SET('Imagen',$dato->Imagen);
     $Insumo->__SET('Nit_Proveedor',$dato->Nit_Proveedor);
-    
+    $Insumo->__SET('id_Categoria',$dato->id_Categoria);
+    $Insumo->__SET('Id_Tamano',$dato->Id_Tamano); 
+    $Insumo->__SET('Id_Tipo_Envoltura',$dato->Id_Tipo_Envoltura); 
     
 
     return $Insumo;
@@ -135,16 +137,15 @@ public function actualizar(InsumoModel $Insumo)
                $Insumo->__GET('id_Categoria'),
                $Insumo->__GET('Id_Tamano'),  
                $Insumo->__GET('Id_Tipo_Envoltura'),
-               $Insumo->__GET('Codigo_insumo'),
-               $Insumo->__GET('Imagen') 
+               $Insumo->__GET('Imagen'),
+               $Insumo->__GET('Codigo_insumo')
 
    ));
-   echo "estoy aqui";
-
+   
      return true;
 
   }catch(\Exeption $error){
-   echo 'error al actualizar los datos'.$error->getMessage();
+    return false;
  
   }
 }
@@ -155,7 +156,7 @@ public function activar(InsumoModel $Insumo){
   try{
 
     $this->conexion->prepare($activar)->execute(array(
-      $Insumo->__GET('Estado'),
+      1,
       $Insumo->__GET('Codigo_insumo')
 
     ));
@@ -170,9 +171,10 @@ public function desactivar(InsumoModel $Insumo){
   $desactivar="UPDATE tbl_insumo SET Estado=? WHERE Codigo_insumo=? ";
   try{
     $this->conexion->prepare($desactivar)->execute(array(
-      $Insumo->__GET('Estado'),
+       $Insumo->__GET('Estado'),
       $Insumo->__GET('Codigo_insumo')
     ));
+    
       return true;
    }catch(\Exeption $error){
     echo 'error al desactivar el insumo'.$error->getMessage();

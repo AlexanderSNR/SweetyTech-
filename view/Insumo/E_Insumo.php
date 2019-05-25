@@ -22,6 +22,7 @@ $resultado=$controlInsumo->buscar($_GET['Codigo_insumo']);
 
 <link rel="stylesheet" href="../../public/css/fileinput.min.css">
 	<?php require_once ("../util/head.php");?>
+
  
   <style>
 #imagen_insumo{
@@ -101,20 +102,19 @@ $resultado=$controlInsumo->buscar($_GET['Codigo_insumo']);
 
   <label for="" class="lbl-campo">StockMinimo: </label>
   <input type="number" class="campos" id="campo" name="StockMinimo" value="<?php echo $resultado->StockMinimo;?>"  >
-
-
-
-  <label for="" class="lbl-campo">Cantidad: </label>
-  <input type="number" class="campos" id="campo" name="Cantidad" value="<?php echo $resultado->Cantidad;?>"  >
-
-
+  
   <label for="" class="lbl-campo">Categoria: </label>    
     <select id="campo" class="campos" name="id_Categoria" >
-    <option selected><?php echo $resultado->Nombre_Categoria;?></option>
+    <option value="<?php echo $resultado->id_Categoria; ?>" selected><?php echo $resultado->Nombre_Categoria;?></option>
       <?php          
 				foreach ($Categoria->Listar() as $r):?>
-        <option value="<?php echo $r->__GET('Id_Categoria'); ?>">
+         <?php if ($r->__GET('Id_Categoria') != $resultado->id_Categoria ) {
+            ?>
+          <option value="<?php echo $r->__GET('Id_Categoria')  ?>">
         <?php echo $r->__GET('Nombre_Categoria'); ?></option>
+          <?php
+        } 
+        ?>
         <?php endforeach; ?>
     </select>
 
@@ -123,26 +123,38 @@ $resultado=$controlInsumo->buscar($_GET['Codigo_insumo']);
 
   <label for="" class="lbl-campo">Tamaño: </label>
   <select id="campo" class="campos" name="Id_Tamano">
-    <option value="<?php echo $resultado->Nombre_Tamano;?>" selected><?php echo $resultado->Nombre_Tamano;?></option>
-    <?php 
+    <option value="<?php echo $resultado->Id_Tamano;?>" selected><?php echo $resultado->Nombre_Tamano;?></option>
+    <?php          
 				foreach ($Tamano->Listar() as $r):?>
-        <option value="<?php echo $r->__GET('Id_Tamano'); ?>">
+         <?php if ($r->__GET('Id_Tamano') != $resultado->Id_Tamano ) {
+            ?>
+          <option value="<?php echo $r->__GET('Id_Tamano')  ?>">
         <?php echo $r->__GET('Nombre_Tamano'); ?></option>
+          <?php
+        } 
+        ?>
+
         <?php endforeach; ?>
     </select>
 
 
   <label for="" class="lbl-campo">Tipo Envoltura: </label>
   <select id="campo" class="campos" name="Id_Tipo_Envoltura" >
-  <option selected><?php echo $resultado->Nombre_Tipo_Envoltura;?></option>
-    <?php 
+  <option  value ="<?php echo $resultado->Id_Tipo_Envoltura;?>"selected><?php echo $resultado->Nombre_Tipo_Envoltura;?></option>
+  <?php          
 				foreach ($TipoEnvoltura->Listar() as $r):?>
-        <option value="<?php echo $r->__GET('Id_Tipo_Envoltura'); ?>">
+         <?php if ($r->__GET('Id_Tipo_Envoltura') != $resultado->Id_Tipo_Envoltura ) {
+            ?>
+          <option value="<?php echo $r->__GET('Id_Tipo_Envoltura')  ?>">
         <?php echo $r->__GET('Nombre_Tipo_Envoltura'); ?></option>
+          <?php
+        } 
+        ?>
         <?php endforeach; ?>
     </select>
     <br>
 <div>
+<label for="" class="lbl-campo">Foto actual</label>
 <img src="../../public/img/insumos/<?php echo $resultado->Imagen;?>" alt="No hay imagen" style="margin-left:35%; width:200px; height: 200px;" >
 </div>
 
@@ -156,6 +168,18 @@ $resultado=$controlInsumo->buscar($_GET['Codigo_insumo']);
 
 </form>
 </div>
+<script src="../../public/js/fileinput.min.js"></script>
+<script>
+$("#archivos").fileinput({
+  uploadUrl:"upload.php",
+  uploadAsync:false,
+  minFileCount:1,
+  maxFileCount:1,
+  showUpload:false,
+  showRemove:false
+});
+
+</script>
 <?php
 
 if (isset($_POST['Actualizar'])) {
@@ -170,33 +194,29 @@ if (isset($_POST['Actualizar'])) {
   $Insumo->__SET('Codigo_insumo', $_GET['Codigo_insumo']);
   $Insumo->__SET('Nit_Proveedor',$_POST['Nit_Proveedor']);
   $Insumo->__SET('Nombre_Insumo',$_POST['Nombre_Insumo']);
-  $Insumo->__SET('Precio_Cliente',$_POST['Precio_Entrada']);
+  $Insumo->__SET('Precio_Entrada',$_POST['Precio_Entrada']);
   $Insumo->__SET('Precio_Cliente',$_POST['Precio_Cliente']);		
   $Insumo->__SET('StockMinimo',$_POST['StockMinimo']);
-  $Insumo->__SET('Cantidad',$_POST['Cantidad']);
   $Insumo->__SET('id_Categoria',$_POST['id_Categoria']);
   $Insumo->__SET('Id_Tamano',$_POST['Id_Tamano']);
   $Insumo->__SET('Id_Tipo_Envoltura',$_POST['Id_Tipo_Envoltura']);
   $Insumo->__SET('Imagen',$imagen);
  
-print_r($Insumo);
 
-  $controlInsumo->actualizar($Insumo);
+  if($controlInsumo->actualizar($Insumo)){
+    echo '<script>swal ( "Genial!" ,  "Insumo actualizado correctamente!" ,  "success" );</script>';
+     
+    echo '<script>setTimeout(() => {
+      window.location.href="C_insumo.php"
+    },2000);</script>';
+  }else{
+    echo '<script>swal ( "Oops" ,  "Ocurrio un problema !" ,  "error" );</script>';
+  }
 
 
 }
 
 ?>
-<script src="../../public/js/fileinput.min.js"></script>
-<script>
-$("#archivos").fileinput({
-  uploadUrl:"upload.php",
-  uploadAsync:false,
-  minFileCount:1,
-  maxFileCount:1,
-  showUpload:false,
-  showRemove:false
-});
-</script>
+
 </body>
 </html>
